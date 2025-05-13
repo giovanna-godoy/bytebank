@@ -1,0 +1,15 @@
+@import '../../../../assets/styles/_variables';
+
+.header-container {
+    width: 100vw;
+    background-color: $color-primary;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 4em;
+    align-items: center;
+
+    .name {
+        color: $color-white
+    }
+}
