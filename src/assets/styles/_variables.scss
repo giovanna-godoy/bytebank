@@ -1,0 +1,21 @@
+@import './colors';
+
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter_18pt-Bold.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter_18pt-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font-family-base: 'Inter', sans-serif;
+$font-size-base: 16px;
