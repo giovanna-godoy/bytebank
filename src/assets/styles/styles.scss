@@ -1,7 +1,7 @@
-@import './_variables';
+@use './_variables' as variables;
 
 * {
-  font-family: $font-family-base;
+  font-family: variables.$font-family-base;
   margin: 0;
   padding: 0;
 }

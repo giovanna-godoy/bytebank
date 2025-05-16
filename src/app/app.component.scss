@@ -1,11 +1,12 @@
-@import '../assets/styles/_variables';
+@use '../assets/styles/_variables' as *;
+@use '../assets/styles/colors' as colors;
 
 .app-container {
   font-family: $font-family-base;
-  background-color: $color-light-green;
+  background-color: colors.$color-light-green;
   margin: 0;
   padding: 0;
-  color: $color-primary;
+  color: colors.$color-primary;
   width: 100vw;
   height: 100vh;
 }

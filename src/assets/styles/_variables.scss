@@ -1,5 +1,4 @@
-@import './colors';
-//TO DO: Ver se esse jeito é o melhor
+@use './_colors' as *;
 
 @font-face {
   font-family: 'Inter';

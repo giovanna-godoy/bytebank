@@ -1,8 +1,10 @@
-@import '../../../../assets/styles/_variables';
+@use '../../../../assets/styles/_variables' as *;
+@use '../../../../assets/styles/colors' as colors;
+
 
 .header-container {
     width: 100vw;
-    background-color: $color-primary;
+    background-color: colors.$color-primary;
     height: 10vh;
     display: flex;
     justify-content: space-between;
@@ -10,6 +12,6 @@
     align-items: center;
 
     .name {
-        color: $color-white
+        color: colors.$color-white
     }
 }
