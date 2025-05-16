@@ -1,1 +1,9 @@
-<p>side-bar works!</p>
+<div class="side-bar-container">
+    <div *ngFor="let menu of listMenu">
+        <div class="item-menu">
+            <p>
+                {{ menu.title }}
+            </p>
+        </div>
+    </div>
+</div>

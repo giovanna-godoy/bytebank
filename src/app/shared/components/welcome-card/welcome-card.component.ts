@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { currentDate } from '../../../core/utils/date.utils';
 
 @Component({
   selector: 'app-welcome-card',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './welcome-card.component.scss'
 })
 export class WelcomeCardComponent {
+  public currentDate: string = currentDate();
 
+  @Input() userName: string = '';
 }
