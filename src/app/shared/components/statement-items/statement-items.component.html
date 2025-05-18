@@ -1,0 +1,32 @@
+<section class="statement">
+  <div class="statement__header">
+    <h2>Extrato</h2>
+    <div class="statement__actions">
+      <button aria-label="Editar" (click)="editItem()">
+        <img src=" /assets/images/buttons/edit-button.png" alt="Editar" />
+      </button>
+      <button aria-label="Excluir" (click)="deleteItem()">
+        <img src="/assets/images/buttons/delete-button.png" alt="Excluir" />
+      </button>
+    </div>
+  </div>
+
+  <div class="statement__list">
+    <div class="statement__item" *ngFor="let item of statementItems">
+      <div>
+        <p class="statement__month">
+          {{ getMonth(item.date) || '' }}
+        </p>
+        <p class="statement__type">
+          {{ item.type || '' }}
+        </p>
+        <p class="statement__value">
+          {{ getValue(item) }}
+        </p>
+      </div>
+      <p class="statement__date">
+        {{ formatDate(item.date) || '' }}
+      </p>
+    </div>
+  </div>
+</section>

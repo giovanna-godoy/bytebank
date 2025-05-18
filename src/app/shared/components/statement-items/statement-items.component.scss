@@ -1,0 +1,72 @@
+@use '../../../../assets/styles/colors' as colors;
+
+.statement {
+    background: colors.$color-light-gray;
+    padding: 1rem;
+    border-radius: 1em;
+    max-width: 100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .statement__actions {
+            display: flex;
+            gap: 0.5rem;
+
+            button {
+                border: none;
+                border-radius: 100%;
+                cursor: pointer;
+
+                img {
+                    width: 2rem;
+                }
+            }
+        }
+    }
+
+    &__list {
+        margin-top: 1rem;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid colors.$color-success;
+        padding: 0.5rem 0;
+        line-height: 1.75rem;
+        color: colors.$color-black;
+
+        .statement__month {
+            font-size: 0.8rem;
+            color: colors.$color-success;
+            margin: 0;
+            text-transform: capitalize;
+        }
+
+        .statement__type {
+            font-size: 0.9rem;
+            margin: 0.2rem 0 0;
+        }
+
+        .statement__value {
+            font-weight: bold;
+            margin: 0;
+            color: colors.$color-black;
+        }
+
+        .statement__date {
+            font-size: 0.7rem;
+            margin-top: 2rem;
+            color: colors.$color-gray;
+            white-space: nowrap;
+        }
+    }
+}

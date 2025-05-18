@@ -1,5 +1,6 @@
 @use '../../../../assets/styles/_variables' as *;
 @use '../../../../assets/styles/colors' as colors;
+@use '../../../../assets/styles/breakpoints' as *;
 
 .header {
     background-color: colors.$color-primary;
@@ -26,5 +27,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    @include mobile {
+        &__username {
+            display: none;
+        }
     }
 }

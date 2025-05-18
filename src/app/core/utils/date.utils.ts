@@ -8,3 +8,7 @@ export function currentDate() {
     const formattedDate = today.charAt(0).toUpperCase() + today.slice(1);
     return formattedDate;
 }
+
+export function formatDate(date: string, mask?: string) {
+    return moment(date, 'YYYY-MM-DD').format(mask || 'DD/MM/YYYY');
+}

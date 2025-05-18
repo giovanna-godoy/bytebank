@@ -10,5 +10,9 @@
         </app-welcome-card>
     </div>
     <div class="transactions-container">Nova Transaçao</div>
-    <div class="extract-container">Extrato</div>
+    <div class="extract-container">
+        <app-statement-items [statementItems]="statementItems">
+
+        </app-statement-items>
+    </div>
 </div>
