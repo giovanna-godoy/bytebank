@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @Input() userName:string = ""
+  @Input() userName:string = "";
 }

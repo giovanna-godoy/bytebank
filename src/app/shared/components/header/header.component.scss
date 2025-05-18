@@ -1,17 +1,30 @@
 @use '../../../../assets/styles/_variables' as *;
 @use '../../../../assets/styles/colors' as colors;
 
-
-.header-container {
-    width: 100vw;
+.header {
     background-color: colors.$color-primary;
-    height: 10vh;
-    display: flex;
-    justify-content: space-between;
-    padding: 1em 4em;
-    align-items: center;
+    padding: 1rem;
 
-    .name {
-        color: colors.$color-white
+    &__content {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 2rem;
+        padding: 0.5em 10em;
+    }
+
+    &__username {
+        color: colors.$color-white;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    &__icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
