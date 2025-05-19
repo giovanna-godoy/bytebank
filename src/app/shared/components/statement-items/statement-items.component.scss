@@ -1,10 +1,11 @@
 @use '../../../../assets/styles/colors' as colors;
+@use '../../../../assets/styles/breakpoints' as *;
 
 .statement {
     background: colors.$color-light-gray;
     padding: 1rem;
     border-radius: 1em;
-    max-width: 100%;
+    width: 70%;
 
     &__header {
         display: flex;
@@ -45,7 +46,7 @@
         color: colors.$color-black;
 
         .statement__month {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: colors.$color-success;
             margin: 0;
             text-transform: capitalize;
@@ -59,14 +60,25 @@
         .statement__value {
             font-weight: bold;
             margin: 0;
+            font-size: 1rem;
             color: colors.$color-black;
         }
 
         .statement__date {
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             margin-top: 2rem;
             color: colors.$color-gray;
             white-space: nowrap;
         }
+    }
+
+    @include tablet {
+        width: 95%;
+        padding: 2rem 17rem;
+    }
+    
+    @include mobile {
+        width: 75vw;
+        padding: 2rem;
     }
 }
