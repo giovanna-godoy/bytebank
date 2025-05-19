@@ -1,8 +1,15 @@
-<div class="welcome-card-container">
-    <p>
-        Olá, {{ userName }} :)
-    </p>
-    <p>
-        {{ currentDate }}
-    </p>
+<div class="welcome-card">
+    <div class="welcome-card__column">
+        <div class="welcome-card__infos">
+            <p class="welcome-card__username">
+                Olá, {{ userName }}! :)
+            </p>
+            <p class="welcome-card__date">
+                {{ currentDate }}
+            </p>
+        </div>
+        <div class="welcome-card__footer">
+            <img class="background-left" src="assets/images/piggy-bank.svg" alt="Cofre" />
+        </div>
+    </div>
 </div>

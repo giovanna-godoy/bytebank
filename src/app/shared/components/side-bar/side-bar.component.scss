@@ -1,4 +1,6 @@
-@use '../../../../assets/styles/colors' as colors;
+@use 'variables' as *;
+@use 'colors' as colors;
+@use 'breakpoints' as *;
 
 .side-bar-container {
     background-color: colors.$color-light-gray;
