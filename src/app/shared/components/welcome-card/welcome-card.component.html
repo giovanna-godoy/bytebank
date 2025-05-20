@@ -1,12 +1,17 @@
 <div class="welcome-card">
     <div class="welcome-card__column">
         <div class="welcome-card__infos">
-            <p class="welcome-card__username">
-                Olá, {{ userName }}! :)
-            </p>
-            <p class="welcome-card__date">
-                {{ currentDate }}
-            </p>
+            <div>
+                <p class="welcome-card__username">
+                    Olá, {{ userName }}! :)
+                </p>
+                <p class="welcome-card__date">
+                    {{ currentDate }}
+                </p>
+            </div>
+            <div class="welcome-card__amount">
+                <app-amount [amount]="amount"></app-amount>
+            </div>
         </div>
         <div class="welcome-card__footer">
             <img class="background-left" src="assets/images/piggy-bank.svg" alt="Cofre" />

@@ -17,19 +17,28 @@
     }
 
     &__infos {
-        line-height: 3.75rem;
-        padding: 2rem;
         background-image: url('../../../../assets/images/pixels-top.svg');
         background-repeat: no-repeat;
         background-position: 100% 100%;
+        display: flex;
+        justify-content: space-between;
     }
 
     &__username {
         font-size: 2rem;
+        padding: 2rem 2rem 1rem 2rem;
     }
 
     &__date {
         font-size: 1.2rem;
+        padding: 2rem 2rem 1rem 2rem;
+    }
+
+    &__amount {
+        width: 40%;
+        display: flex;
+        align-items: end;
+        z-index: 9;
     }
 
     &__footer {
@@ -48,10 +57,16 @@
         width: 90vw;
 
         &__infos {
-            background-image: url('../../../../assets/images/pixels-top.svg');
-            background-repeat: no-repeat;
-            background-position: 0% 100%;
+            display: flex;
+            flex-direction: column;
+            background-position: 0 0;
             text-align: center;
+        }
+
+        &__amount {
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
         }
 
         &__footer {
@@ -67,7 +82,7 @@
         height: 50vh;
         width: 90vw;
 
-         &__footer {
+        &__footer {
             height: auto;
             width: 50%;
         }

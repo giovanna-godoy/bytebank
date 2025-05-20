@@ -1,0 +1,37 @@
+@use 'variables' as *;
+@use 'colors' as colors;
+@use 'breakpoints' as *;
+
+
+.amount {
+    color: colors.$color-white;
+    width: 100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1rem;
+
+        .icon {
+            color: colors.$color-white;
+        }
+    }
+
+    .divider {
+        height: 0.2rem;
+        background-color: colors.$color-white;
+        margin: 0.5rem 0;
+    }
+
+    &__account-type {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__value {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}

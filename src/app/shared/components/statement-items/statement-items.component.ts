@@ -16,7 +16,7 @@ export class StatementItemsComponent {
     return formatDate(date, 'DD/MM/YYYY');
   }
 
-  getValue(item: StatementItem):string {
+  getValue(item: StatementItem) {
     const isTransfer: boolean = item?.type?.toLowerCase() === 'transferência';
 
     return `${isTransfer ? '-R$' : 'R$'} ${item.value}`

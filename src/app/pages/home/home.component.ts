@@ -11,7 +11,8 @@ import { StatementItem } from '../../shared/models/statement.model';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  public userName: string = "Giovanna"
+  public userName: string = "Giovanna";
+  public amount: number = 2500;
   public statementItems: StatementItem[] = [];
 
   ngOnInit() {
