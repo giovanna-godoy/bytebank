@@ -18,7 +18,7 @@
           {{ getMonth(item.date) || '' }}
         </p>
         <p class="statement__type">
-          {{ item.type || '' }}
+          {{ getType(item.type) || '' }}
         </p>
         <p class="statement__value">
           {{ getValue(item) }}
