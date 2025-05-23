@@ -1,8 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StatementItem, TransactionType } from '../../models/statement.model';
 import { CommonModule } from '@angular/common';
 import { formatDate } from '../../../core/utils/date.utils';
-import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-statement-items',
@@ -12,7 +11,9 @@ import { EventEmitter } from 'stream';
 })
 export class StatementItemsComponent {
   @Input() statementItems: StatementItem[] = [];
-  
+  @Output() edit = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
+
   formatDate(date: string):string {
     return formatDate(date, 'DD/MM/YYYY');
   }
@@ -25,7 +26,7 @@ export class StatementItemsComponent {
 
   getType(type: string) {
     const isTransfer: boolean = type?.toUpperCase() === TransactionType.TRANSFERENCIA;
-    //TO DO: Ajustar
+
     return isTransfer ? 'Transferência' : 'Depósito';
   }
 
@@ -33,25 +34,11 @@ export class StatementItemsComponent {
     return formatDate(date, 'MMMM');
   }
 
-  // editItem(item: StatementItem) {
-  //   this.apiService.updateTransaction(item.id, item).subscribe({
-  //     next: (response: any) => alert('Alterado com sucesso!'),
-  //     error: (err: any) => alert('Erro ao alterar'),
-  //   });
-  // }
-
-  // deleteItem(itemId: number) {
-  //   this.apiService.deleteTransaction(itemId).subscribe({
-  //     next: (response: any) => alert('Deletado com sucesso!'),
-  //     error: (err: any) => alert('Erro ao deletar'),
-  //   });
-  // }
-
-  deleteItem() {
-    console.log('excluir')
+  editItem(itemId: number) {
+    this.edit.emit(itemId);
   }
 
-  editItem() {
-    console.log('editar')
+  deleteItem(itemId: number) {
+    this.delete.emit(itemId);
   }
 }

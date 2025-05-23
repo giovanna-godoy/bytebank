@@ -13,11 +13,11 @@ export class ApiService {
   private readonly baseUrl = 'http://localhost:3000';
 
   getStatement(): Observable<StatementItem[]> {
-    return this.http.get<StatementItem[]>(`${this.baseUrl}/search-statement`);
+    return this.http.get<StatementItem[]>(`${this.baseUrl}/statement`);
   }
 
   getTransactionById(id: number): Observable<StatementItem> {
-    return this.http.get<StatementItem>(`${this.baseUrl}/${id}`);
+    return this.http.get<StatementItem>(`${this.baseUrl}/statement/${id}`);
   }
 
   createTransaction(item: Omit<StatementItem, 'id'>): Observable<StatementItem> {
@@ -25,11 +25,11 @@ export class ApiService {
   }
 
   updateTransaction(id: number, item: Partial<StatementItem>): Observable<StatementItem> {
-    return this.http.patch<StatementItem>(`${this.baseUrl}/${id}`, item);
+    return this.http.patch<StatementItem>(`${this.baseUrl}/statement/${id}`, item);
   }
 
   deleteTransaction(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/statement/${id}`);
   }
 
   getUser(): Observable<User> {

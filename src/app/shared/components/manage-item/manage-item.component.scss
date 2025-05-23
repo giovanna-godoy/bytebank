@@ -1,0 +1,100 @@
+@use 'variables' as *;
+@use 'colors' as colors;
+@use 'breakpoints' as *;
+@use '@angular/material' as mat;
+
+.manage-item {
+    background-color: colors.$color-gray;
+    color: colors.$color-white;
+    height: 65vh;
+    width: 100%;
+    border-radius: 1em;
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    &__infos {
+        background-image: url('../../../../assets/images/pixels-top.svg');
+        background-repeat: no-repeat;
+        background-position: 100% 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-size: 2rem;
+        padding: 2rem 2rem 1rem 2rem;
+    }
+
+    &__form {
+        font-size: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+        width: 50%;
+    }
+
+    &__amount {
+        width: 40%;
+        display: flex;
+        align-items: end;
+    }
+
+    &__footer {
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: end;
+        display: flex;
+        background-image: url('../../../../assets/images/card-woman.svg'), url('../../../../assets/images/pixels-bottom.svg');
+        background-repeat: no-repeat;
+        background-position: 90% 80%, 0% 100%;
+    }
+
+    @include mobile {
+        height: 80vh;
+        width: 90vw;
+
+        &__infos {
+            display: flex;
+            flex-direction: column;
+            background-position: 0 0;
+            text-align: center;
+        }
+
+        &__amount {
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        &__footer {
+            height: 50%;
+            width: 100%;
+            background-position: 0% 80%, 0% 100%;
+            justify-content: start;
+        }
+    }
+
+    @include tablet {
+        height: 50vh;
+        width: 95vw;
+
+        &__footer {
+            height: auto;
+            width: 100%;
+        }
+    }
+}
+
+
+:root {
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-text-color: orange,
+    calendar-date-selected-state-background-color: red,
+  ));
+}

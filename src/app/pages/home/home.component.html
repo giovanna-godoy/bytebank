@@ -6,9 +6,12 @@
         <app-welcome-card [userName]="userName" [amount]="amount">
         </app-welcome-card>
     </div>
-    <div class="transactions">Nova Transaçao</div>
+    <div class="transactions">
+        <app-manage-item>
+        </app-manage-item>
+    </div>
     <div class="extract">
-        <app-statement-items [statementItems]="statementItems">
+        <app-statement-items [statementItems]="statementItems" (edit)="editItem($event)" (delete)="deleteItem($event)">
         </app-statement-items>
     </div>
 </div>
