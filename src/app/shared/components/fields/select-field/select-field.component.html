@@ -1,9 +1,6 @@
-<div>
-    <mat-form-field>
-        <mat-label></mat-label>
-        <mat-select aria-placeholder="Selecione o tipo de transaç±ao">
-            <mat-option value="one">First option</mat-option>
-            <mat-option value="two">Second option</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
+<mat-form-field appearance="fill" class="select-field">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select>
+        <mat-option [value]="option.value" *ngFor="let option of options">{{ option.name }}</mat-option>
+    </mat-select>
+</mat-form-field>

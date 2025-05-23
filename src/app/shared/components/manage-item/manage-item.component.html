@@ -1,15 +1,14 @@
 <div class="manage-item">
     <div class="manage-item__column">
         <div class="manage-item__infos">
-            <div>
-                <p class="manage-item__title">
-                    {{ isEdit ? 'Editar' : 'Nova'}} Transação
-                </p>
-                <p class="manage-item__form">
-                   <app-text-field/>
-                   <app-select-field/>
-                   <!-- <app-date-field/> -->
-                </p>
+            <p class="manage-item__title">
+                {{ isEdit ? 'Editar' : 'Nova'}} Transação
+            </p>
+            <div class="manage-item__form">
+                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" />
+                <app-text-field label="Valor" type="number" />
+                <app-date-field />
+                <button mat-flat-button>Concluir Transação</button>
             </div>
         </div>
         <div class="manage-item__footer"></div>

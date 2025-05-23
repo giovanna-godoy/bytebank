@@ -4,6 +4,7 @@
 @use '@angular/material' as mat;
 
 .manage-item {
+    position: relative;
     background-color: colors.$color-gray;
     color: colors.$color-white;
     height: 65vh;
@@ -20,8 +21,9 @@
     &__infos {
         background-image: url('../../../../assets/images/pixels-top.svg');
         background-repeat: no-repeat;
-        background-position: 100% 100%;
+        background-position: 100% 0;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
     }
 
@@ -35,16 +37,12 @@
         display: flex;
         flex-direction: column;
         background-color: transparent;
+        padding: 0 2em;
         width: 50%;
     }
 
-    &__amount {
-        width: 40%;
-        display: flex;
-        align-items: end;
-    }
-
     &__footer {
+        position: absolute;
         height: 100%;
         width: 100%;
         align-items: center;
@@ -53,6 +51,7 @@
         background-image: url('../../../../assets/images/card-woman.svg'), url('../../../../assets/images/pixels-bottom.svg');
         background-repeat: no-repeat;
         background-position: 90% 80%, 0% 100%;
+        pointer-events: none;
     }
 
     @include mobile {
@@ -73,7 +72,7 @@
         }
 
         &__footer {
-            height: 50%;
+            height: 100%;
             width: 100%;
             background-position: 0% 80%, 0% 100%;
             justify-content: start;
@@ -85,7 +84,7 @@
         width: 95vw;
 
         &__footer {
-            height: auto;
+            height: 100%;
             width: 100%;
         }
     }

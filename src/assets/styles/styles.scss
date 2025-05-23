@@ -1,7 +1,22 @@
 @use './_variables' as variables;
+@use '@angular/material' as mat;
+@use './styles_theme-colors.scss' as theme-colors;
 
 * {
   font-family: variables.$font-family-base;
   margin: 0;
   padding: 0;
+}
+
+html {
+  color-scheme: light;
+  @include mat.theme((
+    color: (
+    primary: theme-colors.$primary-palette,
+      tertiary: theme-colors.$tertiary-palette,
+      theme-type: light,
+    ),    
+    typography: variables.$font-family-base,
+    density: 0
+  ));
 }
