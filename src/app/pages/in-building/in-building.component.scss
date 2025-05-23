@@ -1,0 +1,34 @@
+@use 'variables' as *;
+@use 'colors' as colors;
+@use 'breakpoints' as *;
+
+.in-building {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &__content {
+        font-size: 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 70%;
+        justify-content: space-evenly;
+
+        button {
+            background-color: colors.$color-primary;
+            color: colors.$color-white;
+            border: none;
+            padding: 1em;
+            border-radius: 1em;
+            font-size: 0.5em;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

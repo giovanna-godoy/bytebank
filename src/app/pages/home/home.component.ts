@@ -5,6 +5,7 @@ import { StatementItemsComponent } from '../../shared/components/statement-items
 import { StatementItem } from '../../shared/models/statement.model';
 import { ApiService } from '../../services/api.service';
 import { ManageItemComponent } from '../../shared/components/manage-item/manage-item.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   public statementItems: StatementItem[] = [];
 
   private apiService = inject(ApiService);
+  private dialog = inject(MatDialog);
 
   ngOnInit() {
     this.searchBankStatement();
@@ -32,18 +34,25 @@ export class HomeComponent implements OnInit {
 
   
   editItem(itemId: number) {
-    // this.apiService.updateTransaction(item.id, item).subscribe({
-    //   next: (response: any) => alert('Alterado com sucesso!'),
-    //   error: (err: any) => alert('Erro ao alterar'),
-    // });
+    let transaction: StatementItem;
+    this.apiService.getTransactionById(itemId).subscribe({
+       next: (response: any) => transaction =response,
+       error: (err: any) => alert('Erro ao consultar transação'),
+     });
+
+    this.dialog.open(ManageItemComponent, {
+      width: '65vw',
+      data: {}
+    });
+    
 
     this.searchBankStatement();
   }
 
   deleteItem(itemId: number) {
     this.apiService.deleteTransaction(itemId).subscribe({
-      next: (response: any) => alert('Deletado com sucesso!'),
-      error: (err: any) => alert('Erro ao deletar'),
+      next: () => alert('Deletado com sucesso!'),
+      error: () => alert('Erro ao deletar'),
     });
 
     this.searchBankStatement();

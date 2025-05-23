@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Component({
   selector: 'app-side-bar',
@@ -8,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent implements OnInit {
+  listMenu: MenuItem[] = [];
 
-  listMenu: any[] = []
+  private router = inject(Router);
 
   ngOnInit() {
     this.initializeMenu();
@@ -17,10 +20,14 @@ export class SideBarComponent implements OnInit {
 
   initializeMenu(): void {
     this.listMenu = [
-      { title: "Início", route: '' },
-      { title: "Transferências", route: '' },
-      { title: "Investimentos", route: '' },
-      { title: "Outros Serviços", route: ''},
+      { title: "Início", route: 'home' },
+      { title: "Transferências", route: 'transfers' },
+      { title: "Investimentos", route: 'investments' },
+      { title: "Outros Serviços", route: 'others-services'},
     ]
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
   }
 }

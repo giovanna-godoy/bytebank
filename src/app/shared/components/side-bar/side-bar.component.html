@@ -1,6 +1,6 @@
 <div class="side-bar">
     <div *ngFor="let menu of listMenu" class="menu">
-        <div class="menu__item">
+        <div class="menu__item" (click)="navigateTo(menu.route)">
             <p>
                 {{ menu.title }}
             </p>

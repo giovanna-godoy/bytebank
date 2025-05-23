@@ -19,11 +19,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-  
+
   getUser() {
     this.apiService.getUser().subscribe({
       next: (data: User) => (this.fullName = data?.firstName + ' ' + data?.lastName),
-      error: (err: any) => console.error('Erro ao carregar itens', err),
+      error: (err: any) => console.error('Erro ao carregar usuário', err),
     });
   }
 }
