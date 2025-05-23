@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { TextFieldComponent } from '../fields/text-field/text-field.component';
+import { SelectFieldComponent } from '../fields/select-field/select-field.component';
+import { DateFieldComponent } from '../fields/date-field/date-field.component';
 
 @Component({
   selector: 'app-manage-item',
-  providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, CommonModule],
+  imports: [TextFieldComponent, SelectFieldComponent, DateFieldComponent, CommonModule],
   templateUrl: './manage-item.component.html',
   styleUrl: './manage-item.component.scss'
 })
-
 export class ManageItemComponent {
   isEdit: boolean = false;
 }

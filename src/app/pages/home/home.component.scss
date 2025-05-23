@@ -5,12 +5,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 1em;
+    grid-column-gap: 2em;
     grid-row-gap: 1em;
 
     .sidebar {
-        width: 15vw;
-        height: 80vh;
+        height: 100%;
         grid-area: 1 / 1 / 3 / 2;
     }
 
@@ -24,20 +23,15 @@
     }
 
     .extract {
-        width: 25vw;
+        height: 100%;
         grid-area: 1 / 3 / 3 / 4;
     }
 
     @include mobile {
         padding: 1rem;
-
-        .home {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(3, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
-        }
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
 
         .sidebar {
             display: none;
@@ -57,32 +51,26 @@
     }
 
     @include tablet {
-        padding: 1.5rem;
-
-        .home {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(7, 1fr);
-            grid-column-gap: 1.5rem;
-            grid-row-gap: 1.5rem;
-        }
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr repeat(3, 1fr);
+        grid-row-gap: 0.5em;
+        padding: 1.2rem;
 
         .sidebar {
             grid-area: 1 / 1 / 2 / 2;
-            width: 95vw;
-            height: 10vh;
         }
 
         .welcome {
-            grid-area: 2 / 1 / 4 / 2;
+            grid-area: 2 / 1 / 3 / 2;
         }
 
         .transactions {
-            grid-area: 4 / 1 / 6 / 2;
+            grid-area: 3 / 1 / 4 / 2;
         }
 
         .extract {
-            grid-area: 6 / 1 / 8 / 2;
+            grid-area: 4 / 1 / 5 / 2;
         }
     }
 }

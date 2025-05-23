@@ -6,7 +6,9 @@
     background: colors.$color-light-gray;
     padding: 1rem;
     border-radius: 1em;
-    width: 70%;
+    width: 90%;
+    height: 97%;
+    max-height: 97%;
 
     &__header {
         display: flex;
@@ -74,8 +76,8 @@
     }
 
     @include tablet {
-        width: 95%;
-        padding: 2rem 17rem;
+        width: 80%;
+        padding: 2rem 5rem;
     }
     
     @include mobile {
