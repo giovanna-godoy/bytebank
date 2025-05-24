@@ -8,7 +8,7 @@
                 <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event"/>
                 <app-text-field label="Valor" type="number" (valueChange)="value = $event"/>
                 <app-date-field (dateSelected)="date = $event"/>
-                <button mat-flat-button (click)="onSubmit()">Concluir Transação</button>
+                <button mat-flat-button (click)="onSubmit()" [disabled]="!enableButton()">Concluir Transação</button>
             </div>
         </div>
         <div class="manage-item__footer"></div>

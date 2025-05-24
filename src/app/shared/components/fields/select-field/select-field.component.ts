@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './select-field.component.scss'
 })
 export class SelectFieldComponent {
-  selected: string = '';
+  public selected: string = '';
 
   @Input() label: string = '';
   @Input() options: any[] = [];

@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
         transaction = response;
         this.dialog.open(ManageItemComponent, {
           width: '65vw',
-          data: {}
+          data: {transaction, isEdit: true}
         });
       },
       error: () => alert('Erro ao consultar transação'),

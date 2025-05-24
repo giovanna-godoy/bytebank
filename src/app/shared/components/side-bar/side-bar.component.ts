@@ -10,7 +10,7 @@ import { MenuItem } from '../../models/menu-item.model';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent implements OnInit {
-  listMenu: MenuItem[] = [];
+  public listMenu: MenuItem[] = [];
 
   private router = inject(Router);
 
