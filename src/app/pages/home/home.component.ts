@@ -32,7 +32,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  
+  createItem(item: Omit<StatementItem, "id">) {
+    this.apiService.createTransaction(item).subscribe({
+       next: (response: any) => alert('Sucesso ao criar transação'),
+       error: (err: any) => alert('Erro ao consultar transação'),
+     });
+
+    this.searchBankStatement();
+  }
+
   editItem(itemId: number) {
     let transaction: StatementItem;
     this.apiService.getTransactionById(itemId).subscribe({

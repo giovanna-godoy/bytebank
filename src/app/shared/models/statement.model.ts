@@ -1,6 +1,6 @@
 export interface StatementItem {
   id: number;
-  type: TransactionType;
+  type: TransactionType | string;
   value: number;
   date: string;
 }

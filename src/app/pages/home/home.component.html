@@ -7,7 +7,7 @@
         </app-welcome-card>
     </div>
     <div class="transactions">
-        <app-manage-item>
+        <app-manage-item (itemSubmited)="createItem($event)">
         </app-manage-item>
     </div>
     <div class="extract">

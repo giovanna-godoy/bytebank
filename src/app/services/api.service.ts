@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   createTransaction(item: Omit<StatementItem, 'id'>): Observable<StatementItem> {
-    return this.http.post<StatementItem>(this.baseUrl, item);
+    return this.http.post<StatementItem>(`${this.baseUrl}/statement`, item);
   }
 
   updateTransaction(id: number, item: Partial<StatementItem>): Observable<StatementItem> {
