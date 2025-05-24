@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HomeComponent implements OnInit {
   public userName: string = "Giovanna";
-  public amount: number = 2500;
+  public amount: number = 0;
   public statementItems: StatementItem[] = [];
 
   private apiService = inject(ApiService);
@@ -23,46 +23,64 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.searchBankStatement();
+    this.getAmount();
   }
 
   searchBankStatement() {
     this.apiService.getStatement().subscribe({
       next: (data: StatementItem[]) => (this.statementItems = data),
-      error: (err: any) => alert('Erro ao carregar itens'),
+      error: () => alert('Erro ao carregar itens'),
     });
   }
 
   createItem(item: Omit<StatementItem, "id">) {
     this.apiService.createTransaction(item).subscribe({
-       next: (response: any) => alert('Sucesso ao criar transação'),
-       error: (err: any) => alert('Erro ao consultar transação'),
-     });
-
-    this.searchBankStatement();
+      next: () => {
+        alert('Sucesso ao criar transação');
+        this.searchBankStatement();
+      },
+      error: () => alert('Erro ao consultar transação'),
+    });
   }
 
-  editItem(itemId: number) {
+  editItem(item: StatementItem) {
+    this.apiService.updateTransaction(item.id, item).subscribe({
+      next: () => {
+        alert('Sucesso ao atualizar transação');
+        this.searchBankStatement();
+      },
+      error: () => alert('Erro ao consultar transação'),
+    });
+  }
+
+  openModal(itemId: number) {
     let transaction: StatementItem;
     this.apiService.getTransactionById(itemId).subscribe({
-       next: (response: any) => transaction =response,
-       error: (err: any) => alert('Erro ao consultar transação'),
-     });
-
-    this.dialog.open(ManageItemComponent, {
-      width: '65vw',
-      data: {}
+      next: (response: any) => {
+        transaction = response;
+        this.dialog.open(ManageItemComponent, {
+          width: '65vw',
+          data: {}
+        });
+      },
+      error: () => alert('Erro ao consultar transação'),
     });
-    
-
-    this.searchBankStatement();
   }
 
   deleteItem(itemId: number) {
     this.apiService.deleteTransaction(itemId).subscribe({
-      next: () => alert('Deletado com sucesso!'),
+      next: () => {
+        alert('Deletado com sucesso');
+        this.searchBankStatement();
+      },
       error: () => alert('Erro ao deletar'),
     });
+  }
 
-    this.searchBankStatement();
+  getAmount() {
+    this.apiService.getAmount().subscribe({
+      next: (response: any) => this.amount = response?.value,
+      error: () => alert('Erro ao consultar saldo'),
+    });
   }
 }

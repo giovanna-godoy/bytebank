@@ -7,11 +7,11 @@
         </app-welcome-card>
     </div>
     <div class="transactions">
-        <app-manage-item (itemSubmited)="createItem($event)">
+        <app-manage-item (itemSubmited)="createItem($event)" (itemEdited)="editItem($event)">
         </app-manage-item>
     </div>
     <div class="extract">
-        <app-statement-items [statementItems]="statementItems" (edit)="editItem($event)" (delete)="deleteItem($event)">
+        <app-statement-items [statementItems]="statementItems" (edit)="openModal($event)" (delete)="deleteItem($event)">
         </app-statement-items>
     </div>
 </div>
