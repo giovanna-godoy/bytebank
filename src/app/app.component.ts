@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../app/shared/components/header/header.component';
 import { ApiService } from './services/api.service';
 import { User } from './shared/models/user.model';
+import { MenuItem } from './shared/models/menu-item.model';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,8 @@ import { User } from './shared/models/user.model';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'bytebank';
-  fullName: string = '';
+  public title = 'bytebank';
+  public fullName: string = '';
 
   private apiService = inject(ApiService);
 

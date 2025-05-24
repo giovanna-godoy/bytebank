@@ -1,9 +1,21 @@
 <header class="header">
     <div class="header__content">
-        <span class="header__username">{{ userName }}</span>
-        <div class="header__icon" aria-label="Perfil do usuário">
+        <div class="header__menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="header__menu-button">
+                <mat-icon class="header__menu-icon">menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let menu of listMenu" (click)="navigateTo(menu.route)">
+                    {{ menu.title }}
+                </button>
+            </mat-menu>
+        </div>
+        <div class="header__content">
+            <span class="header__username">{{ userName }}</span>
             <div class="header__icon" aria-label="Perfil do usuário">
-                <img src="/assets/images/avatar.png" alt="Ícone de perfil" class="header__icon-img" />
+                <div class="header__icon" aria-label="Perfil do usuário">
+                    <img src="/assets/images/avatar.png" alt="Ícone de perfil" class="header__icon-img" />
+                </div>
             </div>
         </div>
     </div>

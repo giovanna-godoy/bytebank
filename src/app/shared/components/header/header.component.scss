@@ -6,12 +6,16 @@
     background-color: colors.$color-primary;
     padding: 1rem;
 
+    &__menu {
+        display: none;
+    }
+
     &__content {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         gap: 2rem;
-        padding: 0.5em 10em;
+        padding: 0.5em 1em;
     }
 
     &__username {
@@ -31,6 +35,22 @@
     @include mobile {
         &__content {
             padding: 0.5em 1em;
+            justify-content: space-between;
+        }
+
+        &__menu {
+            display: inline;
+            color: colors.$color-success;
+
+            &-button {
+                border: none;
+                background-color: transparent;
+            }
+
+            &-icon {
+                color: colors.$color-orange;
+
+            }
         }
 
         &__username {
