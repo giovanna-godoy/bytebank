@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -13,4 +13,10 @@ export class TextFieldComponent {
   @Input() label: string = "";
   @Input() value: string = "";
   @Input() type: string = "";
+  @Output() valueChange = new EventEmitter<string | number>();
+
+  onInputChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.valueChange.emit(this.type === 'number' ? parseFloat(input.value) : input.value);
+  }
 }

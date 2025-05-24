@@ -5,10 +5,10 @@
                 {{ isEdit ? 'Editar' : 'Nova'}} Transação
             </p>
             <div class="manage-item__form">
-                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" />
-                <app-text-field label="Valor" type="number" />
-                <app-date-field />
-                <button mat-flat-button>Concluir Transação</button>
+                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event"/>
+                <app-text-field label="Valor" type="number" (valueChange)="value = $event"/>
+                <app-date-field (dateSelected)="date = $event"/>
+                <button mat-flat-button (click)="onSubmit()">Concluir Transação</button>
             </div>
         </div>
         <div class="manage-item__footer"></div>

@@ -10,6 +10,6 @@ export function currentDate() {
     return formattedDate;
 }
 
-export function formatDate(date: string, mask?: string) {
-    return moment(date, 'YYYY-MM-DD').format(mask || 'DD/MM/YYYY');
+export function formatDate(date: string, mask?: string, format?: string) {
+    return moment(date, format || 'YYYY-MM-DD').format(mask || 'DD/MM/YYYY');
 }
