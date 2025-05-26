@@ -1,4 +1,6 @@
 import { Meta, Story, Preview } from '@storybook/addon-docs';
+import favicon from './assets/favicon.ico'; // Importação correta do favicon
+import logo from './assets/logo.png'; // Importação da logo
 
 <Meta title="Guia de Estilos" />
 
@@ -8,8 +10,23 @@ import { Meta, Story, Preview } from '@storybook/addon-docs';
 
 Representação visual da marca:
 
-- Favicon ![Favicon](f)
-- Logo ![Logo](f)
+### Favicon
+<div style={{ margin: '20px 0' }}>
+  <img 
+    src={favicon} 
+    alt="Favicon da marca" 
+    style={{ width: '32px', height: '32px' }} 
+  />
+</div>
+
+### Logo
+<div style={{ margin: '20px 0' }}>
+  <img 
+    src={logo} 
+    alt="Logo da marca" 
+    style={{ maxWidth: '200px', height: 'auto' }} 
+  />
+</div>
 
 ## Fonte
 
