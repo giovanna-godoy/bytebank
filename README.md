@@ -37,6 +37,6 @@ npm run storybook
 
 ## Vídeo da aplicação
 
-* xxxx
+* Anexado no zip :)
 
 © 2025 Bytebank. Todos os direitos reservados. - Feito por Giovanna G. Lorente
