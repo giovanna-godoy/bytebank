@@ -25,6 +25,7 @@ export class StatementItemsComponent {
   }
 
   getType(type: string) {
+    console.log(type, TransactionType.TRANSFERENCIA)
     const isTransfer: boolean = type?.toUpperCase() === TransactionType.TRANSFERENCIA;
 
     return isTransfer ? 'Transferência' : 'Depósito';

@@ -6,6 +6,6 @@ export interface StatementItem {
 }
 
 export enum TransactionType {
-  TRANSFERENCIA = 'Transferência',
-  DEPOSITO = 'Depósito'
+  TRANSFERENCIA = 'TRANSFERENCIA',
+  DEPOSITO = 'DEPOSITO'
 }
