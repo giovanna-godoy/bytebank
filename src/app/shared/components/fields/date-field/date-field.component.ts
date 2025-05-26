@@ -5,7 +5,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-import { formatDate } from '../../../../core/utils/date.utils';
+import { convertStringDate, formatDate } from '../../../../core/utils/date.utils';
 
 @Component({
   selector: 'app-date-field',
@@ -23,7 +23,9 @@ export class DateFieldComponent implements OnInit {
   @Output() dateSelected = new EventEmitter<string>();
 
   ngOnInit() {
-    this.selectedDate = typeof(this.initialDate) === 'string' ? new Date(this.initialDate) : this.initialDate;
+    if (this.initialDate) {
+      this.selectedDate = typeof (this.initialDate) === 'string' ? convertStringDate(this.initialDate) : this.initialDate;
+    }
   }
 
   onDateChange(event: any) {
