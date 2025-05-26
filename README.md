@@ -4,8 +4,9 @@ Este projeto foi gerado usando o Angular CLI versão 19.2.11.
 
 ## Requisitos
 
-* Node.js (versão recomendada: >= 18)
+* Node.js (versão recomendada: >= 20)
 * Angular CLI (versão 19.2.11)
+* NPM (versão recomendada >= 9)
 
 ## Instalação
 ```
@@ -31,7 +32,7 @@ npm run start
 ## Storybook
 
 ```bash
-npm run start
+npm run storybook
 ```
 
 ## Vídeo da aplicação
