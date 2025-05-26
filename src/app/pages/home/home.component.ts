@@ -6,6 +6,7 @@ import { StatementItem } from '../../shared/models/statement.model';
 import { ApiService } from '../../services/api.service';
 import { ManageItemComponent } from '../../shared/components/manage-item/manage-item.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ModalBaseComponent } from '../../shared/components/modal-base/modal-base.component';
 
 @Component({
   selector: 'app-home',
@@ -58,9 +59,15 @@ export class HomeComponent implements OnInit {
     this.apiService.getTransactionById(itemId).subscribe({
       next: (response: any) => {
         transaction = response;
-        this.dialog.open(ManageItemComponent, {
+        const dialogRef = this.dialog.open(ModalBaseComponent, {
           width: '65vw',
-          data: {transaction, isEdit: true}
+          data: { ...transaction }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.editItem(result);
+          }
         });
       },
       error: () => alert('Erro ao consultar transação'),

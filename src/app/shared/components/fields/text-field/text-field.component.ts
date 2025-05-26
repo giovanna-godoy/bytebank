@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class TextFieldComponent {
   @Input() label: string = "";
-  @Input() value: string = "";
+  @Input() value: string | number = "";
   @Input() type: string = "";
   @Output() valueChange = new EventEmitter<string | number>();
 

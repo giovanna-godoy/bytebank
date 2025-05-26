@@ -5,9 +5,9 @@
                 {{ isEdit ? 'Editar' : 'Nova'}} Transação
             </p>
             <div class="manage-item__form">
-                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event"/>
-                <app-text-field label="Valor" type="number" (valueChange)="value = $event"/>
-                <app-date-field (dateSelected)="date = $event"/>
+                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event" [selected]="selectedType"/>
+                <app-text-field label="Valor" type="number" (valueChange)="value = $event" [value]="value"/>
+                <app-date-field (dateSelected)="date = $event" [initialDate]="date"/>
                 <button mat-flat-button (click)="onSubmit()" [disabled]="!enableButton()">Concluir Transação</button>
             </div>
         </div>

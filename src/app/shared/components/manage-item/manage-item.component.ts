@@ -14,20 +14,20 @@ import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogTitle } fr
   styleUrl: './manage-item.component.scss'
 })
 export class ManageItemComponent implements OnInit {
+  public typeOptions: any[] = [];
+  public itemId: number = 0;
+  public value: number | string = 0;
   public date: string = '';
   public selectedType: TransactionType | any = null;
-  public typeOptions: any[] = [];
-  public value: number | string = 0;
-  public itemId: number = 0;
 
-  // data = inject(MAT_DIALOG_DATA);
-
+  @Input() selectedItem: StatementItem | null = null;
   @Input() isEdit: boolean = false;
   @Output() itemSubmited = new EventEmitter<Omit<StatementItem, "id">>();
   @Output() itemEdited = new EventEmitter<StatementItem>();
 
   ngOnInit() {
     this.setOptions();
+    this.setValues();
   }
 
   setOptions() {
@@ -35,6 +35,15 @@ export class ManageItemComponent implements OnInit {
       { name: 'Depósito', type: 'DEPOSITO' },
       { name: 'Transferência', type: 'TRANSFERENCIA' }
     ]
+  }
+
+  setValues() {
+    if (this.selectedItem) {
+      this.itemId = this.selectedItem?.id;
+      this.selectedType = this.selectedItem?.type;
+      this.value = this.selectedItem?.value;
+      this.date = this.selectedItem?.date;
+    }
   }
 
   enableButton(): boolean {
@@ -49,7 +58,7 @@ export class ManageItemComponent implements OnInit {
         "date": this.date
       }
 
-      this.isEdit ? this.itemEdited.emit({ id: this.itemId, ...payload}) : this.itemSubmited.emit(payload);
+      this.isEdit ? this.itemEdited.emit({ id: this.itemId, ...payload }) : this.itemSubmited.emit(payload);
     }
   }
 }
