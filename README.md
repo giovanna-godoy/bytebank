@@ -10,7 +10,7 @@ Este projeto foi gerado usando o Angular CLI versão 19.2.11.
 
 ## Instalação
 ```
-git clone https://github.com/seu-usuario/bytebank.git
+git clone https://github.com/giovanna-godoy/bytebank.git
 cd bytebank
 npm install
 ```
