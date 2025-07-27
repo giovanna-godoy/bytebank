@@ -1,9 +1,10 @@
 <div class="app-container">
-    <div>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+    <header role="banner">
         <app-header [userName]="fullName">
         </app-header>
-    </div>
-    <main class="content">
+    </header>
+    <main class="content" role="main" aria-label="Conteúdo principal" id="main-content" tabindex="-1">
         <router-outlet></router-outlet>
     </main>
 </div>

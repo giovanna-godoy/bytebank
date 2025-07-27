@@ -8,6 +8,13 @@
 
     &__menu {
         display: none;
+
+        &-button {
+            &:focus {
+                outline: 2px solid colors.$color-white;
+                outline-offset: 2px;
+            }
+        }
     }
 
     &__content {
@@ -16,6 +23,12 @@
         align-items: center;
         gap: 2rem;
         padding: 0.5em 1em;
+    }
+
+    &__user-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     &__username {
@@ -30,6 +43,22 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        img {
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+
+            &:focus {
+                outline: 2px solid colors.$color-white;
+                outline-offset: 2px;
+                transform: scale(1.1);
+            }
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
     }
 
     @include mobile {

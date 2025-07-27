@@ -19,8 +19,14 @@ export class DateFieldComponent implements OnInit {
 
   @Input() label = 'Data';
   @Input() initialDate: Date | string = '';
+  @Input() required: boolean = false;
 
   @Output() dateSelected = new EventEmitter<string>();
+
+  fieldId = `date-field-${Math.random().toString(36).substr(2, 9)}`;
+  errorId = `${this.fieldId}-error`;
+  hasError = false;
+  errorMessage = '';
 
   ngOnInit() {
     if (this.initialDate) {
@@ -30,6 +36,17 @@ export class DateFieldComponent implements OnInit {
 
   onDateChange(event: any) {
     const date = event.value.toLocaleDateString('pt-BR');
+    this.validateDate(event.value);
     this.dateSelected.emit(formatDate(date, 'YYYY-MM-DD', 'DD/MM/YYYY'));
+  }
+
+  private validateDate(value: Date): void {
+    if (this.required && !value) {
+      this.hasError = true;
+      this.errorMessage = `${this.label} é obrigatória`;
+    } else {
+      this.hasError = false;
+      this.errorMessage = '';
+    }
   }
 }

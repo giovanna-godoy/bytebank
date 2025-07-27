@@ -41,4 +41,15 @@ export class StatementItemsComponent {
   deleteItem(itemId: number) {
     this.delete.emit(itemId);
   }
+
+  trackByItemId(index: number, item: StatementItem): number {
+    return item.id;
+  }
+
+  getItemAriaLabel(item: StatementItem): string {
+    const type = this.getType(item.type);
+    const value = this.getValue(item);
+    const date = this.formatDate(item.date);
+    return `${type} de ${value} realizada em ${date}`;
+  }
 }

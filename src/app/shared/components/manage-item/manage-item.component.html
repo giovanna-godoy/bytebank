@@ -1,16 +1,36 @@
-<div class="manage-item">
+<section class="manage-item" role="region" [attr.aria-label]="(isEdit ? 'Editar' : 'Nova') + ' transação'">
     <div class="manage-item__column">
-        <div class="manage-item__infos">
-            <p class="manage-item__title">
+        <header class="manage-item__infos">
+            <h2 class="manage-item__title" id="form-title">
                 {{ isEdit ? 'Editar' : 'Nova'}} Transação
-            </p>
-            <div class="manage-item__form">
-                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event" [selected]="selectedType"/>
-                <app-text-field label="Valor" type="number" (valueChange)="value = $event" [value]="value"/>
-                <app-date-field (dateSelected)="date = $event" [initialDate]="date"/>
-                <button mat-flat-button (click)="onSubmit()" [disabled]="!enableButton()">Concluir Transação</button>
-            </div>
-        </div>
-        <div class="manage-item__footer"></div>
+            </h2>
+            <form class="manage-item__form" role="form" aria-labelledby="form-title" (ngSubmit)="onSubmit()" #transactionForm="ngForm">
+                <app-select-field 
+                    label="Selecione o tipo de transação" 
+                    [options]="typeOptions" 
+                    (selectionChange)="selectedType = $event" 
+                    [selected]="selectedType"
+                    [attr.aria-required]="true"/>
+                <app-text-field 
+                    label="Valor" 
+                    type="number" 
+                    (valueChange)="value = $event" 
+                    [value]="value"
+                    [attr.aria-required]="true"/>
+                <app-date-field 
+                    (dateSelected)="date = $event" 
+                    [initialDate]="date"
+                    [attr.aria-required]="true"/>
+                <button 
+                    mat-flat-button 
+                    type="submit"
+                    [disabled]="!enableButton()"
+                    [attr.aria-label]="(isEdit ? 'Salvar alterações da' : 'Criar nova') + ' transação'"
+                    class="manage-item__submit-btn">
+                    {{ isEdit ? 'Salvar Alterações' : 'Concluir Transação' }}
+                </button>
+            </form>
+        </header>
+        <div class="manage-item__footer" aria-hidden="true"></div>
     </div>
-</div>
+</section>

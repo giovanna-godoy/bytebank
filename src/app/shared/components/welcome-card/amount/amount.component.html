@@ -1,15 +1,26 @@
-<div class="amount">
+<div class="amount" role="region" aria-label="Informações de saldo da conta">
   <div class="amount__header">
-    <h2>Saldo</h2>
-    <mat-icon *ngIf="showAmount" aria-hidden="false" aria-label="Hide amount" fontIcon="visibility"
-      (click)=" showAmount = !showAmount" />
-    <mat-icon *ngIf="!showAmount" aria-hidden="false" aria-label="Show amount" fontIcon="visibility_off"
-      (click)=" showAmount = !showAmount" />
+    <h2 id="saldo-title">Saldo</h2>
+    <button 
+      class="amount__toggle-btn"
+      (click)="toggleAmountVisibility()"
+      [attr.aria-label]="showAmount ? 'Ocultar saldo' : 'Mostrar saldo'"
+      [attr.aria-pressed]="showAmount"
+      type="button">
+      <mat-icon 
+        [fontIcon]="showAmount ? 'visibility' : 'visibility_off'"
+        aria-hidden="true">
+      </mat-icon>
+    </button>
   </div>
-  <div class="divider"></div>
-  <div class="amount__content">
-    <div class="amount__account-type">Conta Corrente</div>
-    <div class="amount__value">
-      R$ {{ showAmount ? amount : '******' }}</div>
+  <div class="divider" role="separator" aria-hidden="true"></div>
+  <div class="amount__content" aria-labelledby="saldo-title">
+    <div class="amount__account-type" role="text">Conta Corrente</div>
+    <div 
+      class="amount__value" 
+      role="text"
+      [attr.aria-label]="showAmount ? 'Saldo atual: R$ ' + amount : 'Saldo oculto'">
+      R$ {{ showAmount ? amount : '******' }}
+    </div>
   </div>
 </div>

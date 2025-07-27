@@ -12,4 +12,8 @@ export class AmountComponent {
   public showAmount:boolean = true;
 
   @Input() amount: number = 0;
+
+  toggleAmountVisibility(): void {
+    this.showAmount = !this.showAmount;
+  }
 }

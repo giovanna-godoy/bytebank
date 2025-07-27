@@ -1,5 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TextFieldComponent } from '../fields/text-field/text-field.component';
 import { SelectFieldComponent } from '../fields/select-field/select-field.component';
 import { DateFieldComponent } from '../fields/date-field/date-field.component';
@@ -9,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogTitle } fr
 
 @Component({
   selector: 'app-manage-item',
-  imports: [TextFieldComponent, SelectFieldComponent, DateFieldComponent, CommonModule, MatButtonModule],
+  imports: [TextFieldComponent, SelectFieldComponent, DateFieldComponent, CommonModule, MatButtonModule, FormsModule],
   templateUrl: './manage-item.component.html',
   styleUrl: './manage-item.component.scss'
 })

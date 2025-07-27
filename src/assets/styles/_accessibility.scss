@@ -1,0 +1,104 @@
+// Screen reader only class
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Skip link for keyboard navigation
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 4px;
+  
+  &:focus {
+    top: 6px;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor !important;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Focus visible styles
+*:focus-visible {
+  outline: 2px solid #004D61;
+  outline-offset: 2px;
+}
+
+// Remove outline for mouse users
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// Ensure interactive elements have minimum touch target size
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+a {
+  min-height: 44px;
+  min-width: 44px;
+  
+  @media (max-width: 767px) {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+// Improve text readability
+body {
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+// Ensure sufficient color contrast
+.text-low-contrast {
+  color: #666;
+}
+
+// Error states
+.error {
+  color: #EA4335;
+  font-weight: 500;
+}
+
+// Success states
+.success {
+  color: #34A853;
+  font-weight: 500;
+}
+
+// Warning states
+.warning {
+  color: #FBBC04;
+  font-weight: 500;
+}
