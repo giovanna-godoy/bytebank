@@ -1,7 +1,7 @@
 <div class="app-container">
     <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
     <header role="banner">
-        <app-header [userName]="fullName">
+        <app-header [userName]="(fullName$ | async) || ''">
         </app-header>
     </header>
     <main class="content" role="main" aria-label="Conteúdo principal" id="main-content" tabindex="-1">

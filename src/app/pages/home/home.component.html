@@ -3,7 +3,7 @@
         <app-side-bar></app-side-bar>
     </aside>
     <section class="welcome" aria-label="Boas-vindas e saldo">
-        <app-welcome-card [userName]="userName" [amount]="amount">
+        <app-welcome-card [userName]="(userName$ | async) || ''" [amount]="(amount$ | async) || 0">
         </app-welcome-card>
     </section>
     <section class="transactions" aria-label="Gerenciar transações">
@@ -11,7 +11,8 @@
         </app-manage-item>
     </section>
     <section class="extract" aria-label="Extrato de transações">
-        <app-statement-items [statementItems]="statementItems" (edit)="openModal($event)" (delete)="deleteItem($event)">
+        <app-transaction-filters></app-transaction-filters>
+        <app-statement-items [statementItems]="(statementItems$ | async) || []" (edit)="openModal($event)" (delete)="deleteItem($event)">
         </app-statement-items>
     </section>
 </div>

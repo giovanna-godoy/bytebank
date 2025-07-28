@@ -4,11 +4,11 @@
     <button 
       class="amount__toggle-btn"
       (click)="toggleAmountVisibility()"
-      [attr.aria-label]="showAmount ? 'Ocultar saldo' : 'Mostrar saldo'"
-      [attr.aria-pressed]="showAmount"
+      [attr.aria-label]="(showAmount$ | async) ? 'Ocultar saldo' : 'Mostrar saldo'"
+      [attr.aria-pressed]="showAmount$ | async"
       type="button">
       <mat-icon 
-        [fontIcon]="showAmount ? 'visibility' : 'visibility_off'"
+        [fontIcon]="(showAmount$ | async) ? 'visibility' : 'visibility_off'"
         aria-hidden="true">
       </mat-icon>
     </button>
@@ -19,8 +19,8 @@
     <div 
       class="amount__value" 
       role="text"
-      [attr.aria-label]="showAmount ? 'Saldo atual: R$ ' + amount : 'Saldo oculto'">
-      R$ {{ showAmount ? amount : '******' }}
+      [attr.aria-label]="(showAmount$ | async) ? 'Saldo atual: R$ ' + amount : 'Saldo oculto'">
+      R$ {{ (showAmount$ | async) ? amount : '******' }}
     </div>
   </div>
 </div>
