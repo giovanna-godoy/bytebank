@@ -3,13 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4200",
+    "start:shell": "ng serve --port 4200",
     "start:api": "json-server --watch src/app/core/json-server/server.json --port 3000",
-    "start:mfe": "ng serve investments-mfe",
+    "start:mfe": "ng serve investments-mfe --port 4201",
+    "start:all": "concurrently \"npm run start:api\" \"npm run start:shell\" \"npm run start:mfe\"",
     "build": "ng build",
     "build:mfe": "ng build investments-mfe",
     "build:prod": "ng build --configuration production",
     "build:mfe:prod": "ng build investments-mfe --configuration production",
+    "build:all": "npm run build && npm run build:mfe",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:bytebank": "node dist/bytebank/server/server.mjs",
@@ -18,7 +21,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-architects/module-federation": "^20.0.0",
     "@angular/cdk": "^19.2.15",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
@@ -43,6 +45,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-architects/module-federation": "^20.0.0",
     "@angular-devkit/build-angular": "^19.2.11",
     "@angular/cli": "^19.2.11",
     "@angular/compiler-cli": "^19.2.0",
@@ -55,6 +58,7 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "concurrently": "^9.2.0",
     "jasmine-core": "~5.6.0",
     "json-server": "^1.0.0-beta.3",
     "karma": "~6.4.0",

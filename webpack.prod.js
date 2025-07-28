@@ -6,12 +6,14 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "shell",
       remotes: {
-        investmentsMfe: "investmentsMfe@https://investments-mfe.vercel.app/remoteEntry.js",
+        investmentsMfe: "investmentsMfe@https://investments-mfe.bytebank.com/remoteEntry.js",
       },
       shared: {
-        "@angular/core": { singleton: true },
-        "@angular/common": { singleton: true },
-        "@angular/router": { singleton: true },
+        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: "auto" },
+        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: "auto" },
+        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: "auto" },
+        "@angular/material": { singleton: true, strictVersion: true, requiredVersion: "auto" },
+        "rxjs": { singleton: true, strictVersion: true, requiredVersion: "auto" },
       },
     }),
   ],
