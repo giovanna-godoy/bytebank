@@ -1,0 +1,7 @@
+{
+  "name": "bytebank-investments-mfe",
+  "buildCommand": "npm run build:mfe",
+  "outputDirectory": "dist/investments-mfe",
+  "installCommand": "npm install",
+  "framework": "angular"
+}
