@@ -12,7 +12,13 @@
     </section>
     <section class="extract" aria-label="Extrato de transações">
         <app-transaction-filters></app-transaction-filters>
-        <app-statement-items [statementItems]="(statementItems$ | async) || []" (edit)="openModal($event)" (delete)="deleteItem($event)">
+        <app-statement-items 
+            [statementItems]="(statementItems$ | async) || []"
+            [loading]="(loading$ | async) || false"
+            [hasMore]="(hasMore$ | async) || false"
+            (edit)="openModal($event)" 
+            (delete)="deleteItem($event)"
+            (loadMore)="loadMoreTransactions()">
         </app-statement-items>
     </section>
 </div>

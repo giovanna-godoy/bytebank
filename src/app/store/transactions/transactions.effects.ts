@@ -57,4 +57,19 @@ export class TransactionEffects {
       )
     )
   );
+
+  loadMoreTransactions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TransactionActions.loadMoreTransactions),
+      switchMap(() =>
+        this.apiService.getStatement().pipe(
+          map(transactions => {
+            const hasMore = transactions.length >= 10;
+            return TransactionActions.loadMoreTransactionsSuccess({ transactions, hasMore });
+          }),
+          catchError(error => of(TransactionActions.loadTransactionsFailure({ error: error.message })))
+        )
+      )
+    )
+  );
 }

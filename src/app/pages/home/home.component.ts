@@ -17,9 +17,12 @@ import {
   createTransaction, 
   updateTransaction, 
   deleteTransaction,
+  loadMoreTransactions,
   selectFilteredTransactions,
   selectUserAmount,
-  selectUserFullName
+  selectUserFullName,
+  selectTransactionLoading,
+  selectHasMore
 } from '../../store';
 import { ApiService } from '../../services/api.service';
 
@@ -33,6 +36,8 @@ export class HomeComponent implements OnInit {
   public userName$: Observable<string>;
   public amount$: Observable<number>;
   public statementItems$: Observable<StatementItem[]>;
+  public loading$: Observable<boolean>;
+  public hasMore$: Observable<boolean>;
 
   private store = inject(Store<AppState>);
   private dialog = inject(MatDialog);
@@ -42,6 +47,8 @@ export class HomeComponent implements OnInit {
     this.userName$ = this.store.select(selectUserFullName);
     this.amount$ = this.store.select(selectUserAmount);
     this.statementItems$ = this.store.select(selectFilteredTransactions);
+    this.loading$ = this.store.select(selectTransactionLoading);
+    this.hasMore$ = this.store.select(selectHasMore);
   }
 
   ngOnInit() {
@@ -77,5 +84,9 @@ export class HomeComponent implements OnInit {
 
   deleteItem(itemId: number) {
     this.store.dispatch(deleteTransaction({ id: itemId }));
+  }
+
+  loadMoreTransactions() {
+    this.store.dispatch(loadMoreTransactions());
   }
 }

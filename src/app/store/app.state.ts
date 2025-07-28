@@ -19,6 +19,14 @@ export interface TransactionState {
   loading: boolean;
   error: string | null;
   filters: TransactionFilters;
+  pagination: PaginationState;
+}
+
+export interface PaginationState {
+  currentPage: number;
+  pageSize: number;
+  totalItems: number;
+  hasMore: boolean;
 }
 
 export interface TransactionFilters {

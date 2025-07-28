@@ -57,3 +57,13 @@ export const selectTransactionsByType = createSelector(
     };
   }
 );
+
+export const selectPagination = createSelector(
+  selectTransactionState,
+  (state: TransactionState) => state.pagination
+);
+
+export const selectHasMore = createSelector(
+  selectPagination,
+  (pagination) => pagination.hasMore
+);

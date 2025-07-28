@@ -20,3 +20,7 @@ export const deleteTransactionFailure = createAction('[Transactions] Delete Tran
 
 export const setFilters = createAction('[Transactions] Set Filters', props<{ filters: Partial<TransactionFilters> }>());
 export const clearFilters = createAction('[Transactions] Clear Filters');
+
+export const loadMoreTransactions = createAction('[Transactions] Load More Transactions');
+export const loadMoreTransactionsSuccess = createAction('[Transactions] Load More Transactions Success', props<{ transactions: StatementItem[]; hasMore: boolean }>());
+export const resetPagination = createAction('[Transactions] Reset Pagination');

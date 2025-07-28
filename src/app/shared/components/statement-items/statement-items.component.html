@@ -3,7 +3,12 @@
     <h2 id="extrato-title">Extrato</h2>
   </header>
 
-  <div class="statement__list" role="list" aria-labelledby="extrato-title">
+  <div 
+    class="statement__list" 
+    role="list" 
+    aria-labelledby="extrato-title"
+    appInfiniteScroll
+    (scrolled)="onLoadMore()">
     <article 
       class="statement__item" 
       *ngFor="let item of statementItems; trackBy: trackByItemId" 
@@ -52,5 +57,14 @@
         </div>
       </div>
     </article>
+    
+    <div *ngIf="loading" class="statement__loading" role="status" aria-label="Carregando mais transações">
+      <div class="loading-spinner"></div>
+      <span>Carregando mais transações...</span>
+    </div>
+    
+    <div *ngIf="!hasMore && statementItems.length > 0" class="statement__end" role="status">
+      <span>Todas as transações foram carregadas</span>
+    </div>
   </div>
 </section>

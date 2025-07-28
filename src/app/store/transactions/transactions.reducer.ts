@@ -11,6 +11,12 @@ export const initialState: TransactionState = {
     type: null,
     dateFrom: null,
     dateTo: null
+  },
+  pagination: {
+    currentPage: 1,
+    pageSize: 10,
+    totalItems: 0,
+    hasMore: true
   }
 };
 
@@ -57,5 +63,24 @@ export const transactionsReducer = createReducer(
   on(TransactionActions.clearFilters, (state) => ({
     ...state,
     filters: initialState.filters
+  })),
+  on(TransactionActions.loadMoreTransactions, (state) => ({
+    ...state,
+    loading: true
+  })),
+  on(TransactionActions.loadMoreTransactionsSuccess, (state, { transactions, hasMore }) => ({
+    ...state,
+    items: [...state.items, ...transactions],
+    loading: false,
+    pagination: {
+      ...state.pagination,
+      currentPage: state.pagination.currentPage + 1,
+      hasMore
+    }
+  })),
+  on(TransactionActions.resetPagination, (state) => ({
+    ...state,
+    items: [],
+    pagination: initialState.pagination
   }))
 );

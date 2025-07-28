@@ -130,6 +130,36 @@
         }
     }
 
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        color: colors.$color-gray;
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid colors.$color-light-gray;
+            border-top: 2px solid colors.$color-primary;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    }
+
+    &__end {
+        text-align: center;
+        padding: 1rem;
+        color: colors.$color-gray;
+        font-style: italic;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
     @include tablet {
         width: 80%;
         padding: 2rem 5rem;
