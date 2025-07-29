@@ -1,0 +1,36 @@
+{
+    "statement": [
+        {
+            "id": 1,
+            "type": "DEPOSITO",
+            "value": 1500,
+            "date": "2025-05-18"
+        },
+        {
+            "id": 2,
+            "type": "DEPOSITO",
+            "value": 100,
+            "date": "2025-05-21"
+        },
+        {
+            "id": 3,
+            "type": "DEPOSITO",
+            "value": 50,
+            "date": "2025-05-21"
+        },
+        {
+            "id": 4,
+            "type": "TRANSFERENCIA",
+            "value": 500,
+            "date": "2025-05-21"
+        }
+    ],
+    "user": {
+        "id": 360843,
+        "firstName": "Giovanna",
+        "lastName": "Marinho de Godoy Lorente"
+    },
+    "amount": {
+        "value": 2500
+    }
+}

@@ -10,8 +10,6 @@
     "start:all": "concurrently \"npm run start:api\" \"npm run start:shell\" \"npm run start:mfe\"",
     "build": "ng build",
     "build:mfe": "ng build investments-mfe",
-    "build:prod": "ng build --configuration production",
-    "build:mfe:prod": "ng build investments-mfe --configuration production",
     "build:all": "npm run build && npm run build:mfe",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

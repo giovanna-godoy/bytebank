@@ -1,0 +1,14 @@
+{
+  "name": "bytebank-api",
+  "version": "1.0.0",
+  "description": "Bytebank JSON Server API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "json-server --watch db.json --port 3000"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
