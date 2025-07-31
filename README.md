@@ -49,6 +49,23 @@ npm run start:all
 npm run storybook
 ```
 
+## Docker - Only Dev
+
+### Requisitos
+
+* Docker (versão recomendada: >= 20)
+* Docker Compose (versão 2.13.0)
+
+Para inicializar:
+```bash
+docker-compose up -d
+```
+
+Para finalizar:
+```bash
+docker-compose down
+```
+
 ## Vídeo da aplicação
 
 * Anexado no zip :)
