@@ -66,6 +66,11 @@ Para finalizar:
 docker-compose down
 ```
 
+## URL's - Vercel
+* Aplicação Principal: https://bytebank-shell-gio.vercel.app/
+* MFE Investments: https://bytebank-investments-mfe.vercel.app/
+* API: https://bytebank-api-gio.vercel.app/
+
 ## Vídeo da aplicação
 
 * Anexado no zip :)
