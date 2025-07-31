@@ -29,6 +29,14 @@
 
 mat-form-field {
   width: 100%;
+  
+  .mat-mdc-input-element {
+    color: colors.$color-black !important;
+  }
+  
+  .mat-mdc-form-field-label {
+    color: colors.$color-gray !important;
+  }
 }
 
 @media (max-width: 1024px) {

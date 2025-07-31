@@ -24,22 +24,6 @@ const server = http.createServer((req, res) => {
       return;
     }
   }
-  
-  const { url } = req;
-  
-  if (url === '/statement' || url === '/statement/') {
-    res.writeHead(200);
-    res.end(JSON.stringify(data.statement));
-  } else if (url === '/user' || url === '/user/') {
-    res.writeHead(200);
-    res.end(JSON.stringify(data.user));
-  } else if (url === '/amount' || url === '/amount/') {
-    res.writeHead(200);
-    res.end(JSON.stringify(data.amount));
-  } else {
-    res.writeHead(200);
-    res.end(JSON.stringify(data));
-  }
 });
 
 const port = process.env.PORT || 3000;
