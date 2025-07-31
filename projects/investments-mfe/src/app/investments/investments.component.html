@@ -14,10 +14,20 @@
   </div>
   
   <div class="investment-cards">
-    <div class="card" *ngFor="let investment of investmentData; trackBy: trackByType">
-      <h3>{{ investment.type }}</h3>
-      <p>{{ investment.description }}</p>
-      <span class="yield">{{ investment.yield }}</span>
+    <div class="card">
+      <h3>Renda Fixa</h3>
+      <p>CDB, LCI, LCA</p>
+      <span class="yield">12,5% a.a.</span>
+    </div>
+    <div class="card">
+      <h3>Renda Variável</h3>
+      <p>Ações, FIIs</p>
+      <span class="yield">+15% a.a.</span>
+    </div>
+    <div class="card">
+      <h3>Fundos</h3>
+      <p>Multimercado</p>
+      <span class="yield">8,2% a.a.</span>
     </div>
   </div>
 </div>
