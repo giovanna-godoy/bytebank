@@ -20,7 +20,7 @@ import {
   loadMoreTransactions,
   selectFilteredTransactions,
   selectUserAmount,
-  selectUserFullName,
+  selectUserFirstName,
   selectTransactionLoading,
   selectHasMore
 } from '../../store';
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   private apiService = inject(ApiService);
 
   constructor() {
-    this.userName$ = this.store.select(selectUserFullName);
+    this.userName$ = this.store.select(selectUserFirstName);
     this.amount$ = this.store.select(selectUserAmount);
     this.statementItems$ = this.store.select(selectFilteredTransactions);
     this.loading$ = this.store.select(selectTransactionLoading);

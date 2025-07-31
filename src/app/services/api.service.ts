@@ -10,7 +10,7 @@ import { User } from '../shared/models/user.model';
 export class ApiService {
   private http = inject(HttpClient);
 
-  private isLocal: boolean = false
+  private isLocal: boolean = window.location.hostname === 'localhost';
   private readonly baseUrl = this.isLocal ? 'http://localhost:3000' : 'https://bytebank-api-gio.vercel.app/';
 
   getStatement(): Observable<StatementItem[]> {

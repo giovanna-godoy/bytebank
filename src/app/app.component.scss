@@ -12,3 +12,9 @@
   height: 100vh;
   overflow-x: hidden;
 }
+
+.content {
+  &.no-header {
+    height: 100vh;
+  }
+}

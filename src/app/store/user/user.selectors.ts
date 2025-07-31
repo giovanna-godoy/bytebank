@@ -27,3 +27,8 @@ export const selectUserFullName = createSelector(
   selectCurrentUser,
   (user) => user ? `${user.firstName} ${user.lastName}` : ''
 );
+
+export const selectUserFirstName = createSelector(
+  selectCurrentUser,
+  (user) => user ? `${user.firstName}` : ''
+);
