@@ -14,7 +14,7 @@ export class AuthService {
 
   login(email: string, password: string): boolean {
     // Simulação de autenticação
-    if (email === 'user@bytebank.com' && password === '123456') {
+    if (email === 'user@bytebank.com' && password === 'Fiap@2025') {
       const token = this.generateToken();
       localStorage.setItem(this.tokenKey, token);
       this.isAuthenticatedSubject.next(true);

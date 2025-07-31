@@ -43,6 +43,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    &__avatar-button {
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 50%;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
         img {
             border-radius: 50%;
