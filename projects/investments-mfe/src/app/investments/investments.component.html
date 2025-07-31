@@ -1,0 +1,23 @@
+<div class="investments-container">
+  <h2>Investimentos</h2>
+  
+  <div class="charts-section">
+    <div class="chart-container">
+      <h3>Distribuição da Carteira</h3>
+      <canvas #portfolioChart></canvas>
+    </div>
+    
+    <div class="chart-container">
+      <h3>Performance Mensal</h3>
+      <canvas #performanceChart></canvas>
+    </div>
+  </div>
+  
+  <div class="investment-cards">
+    <div class="card" *ngFor="let investment of investmentData; trackBy: trackByType">
+      <h3>{{ investment.type }}</h3>
+      <p>{{ investment.description }}</p>
+      <span class="yield">{{ investment.yield }}</span>
+    </div>
+  </div>
+</div>
