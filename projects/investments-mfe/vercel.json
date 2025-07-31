@@ -1,0 +1,13 @@
+{
+  "name": "bytebank-investments-mfe",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/investments-mfe/browser",
+  "installCommand": "npm install",
+  "framework": "angular",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

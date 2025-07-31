@@ -1,6 +1,20 @@
 <mat-form-field appearance="fill" class="date-field">
-  <mat-label> {{ label }}</mat-label>
-  <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)" [value]="selectedDate">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
+  <mat-label>{{ label }}</mat-label>
+  <input 
+    matInput 
+    [matDatepicker]="picker" 
+    (dateChange)="onDateChange($event)" 
+    [value]="selectedDate"
+    [attr.aria-label]="label"
+    [attr.aria-required]="required"
+    [attr.aria-describedby]="errorId"
+    [id]="fieldId"
+    readonly>
+  <mat-datepicker-toggle 
+    matSuffix 
+    [for]="picker"
+    [attr.aria-label]="'Abrir calendário para ' + label">
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker [attr.aria-label]="'Calendário para seleção de data'"></mat-datepicker>
+  <mat-error [id]="errorId" *ngIf="hasError">{{ errorMessage }}</mat-error>
 </mat-form-field>

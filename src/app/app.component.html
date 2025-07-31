@@ -1,9 +1,10 @@
 <div class="app-container">
-    <div>
-        <app-header [userName]="fullName">
+    <a class="skip-link" *ngIf="isAuthenticated$ | async" href="#main-content">Pular para o conteúdo principal</a>
+    <header role="banner" *ngIf="isAuthenticated$ | async">
+        <app-header [userName]="(fullName$ | async) || ''">
         </app-header>
-    </div>
-    <main class="content">
+    </header>
+    <main class="content" role="main" aria-label="Conteúdo principal" id="main-content" tabindex="-1" [class.no-header]="!(isAuthenticated$ | async)">
         <router-outlet></router-outlet>
     </main>
 </div>

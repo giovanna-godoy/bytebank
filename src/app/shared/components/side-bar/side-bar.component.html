@@ -1,9 +1,16 @@
-<div class="side-bar">
-    <div *ngFor="let menu of listMenu" class="menu">
-        <div class="menu__item" (click)="navigateTo(menu.route)">
-            <p>
-                {{ menu.title }}
-            </p>
-        </div>
-    </div>
-</div>
+<nav class="side-bar" role="navigation" aria-label="Menu de navegação principal">
+    <ul class="menu-list" role="menubar">
+        <li *ngFor="let menuItem of listMenu; trackBy: trackByRoute" class="menu" role="none">
+            <button 
+                class="menu__item" 
+                (click)="navigateTo(menuItem.route)"
+                (keydown.enter)="navigateTo(menuItem.route)"
+                (keydown.space)="navigateTo(menuItem.route)"
+                role="menuitem"
+                [attr.aria-label]="'Navegar para ' + menuItem.title"
+                tabindex="0">
+                {{ menuItem.title }}
+            </button>
+        </li>
+    </ul>
+</nav>

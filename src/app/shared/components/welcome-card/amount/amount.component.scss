@@ -14,8 +14,41 @@
         font-weight: bold;
         font-size: 1.2rem;
 
-        .icon {
-            color: colors.$color-white;
+        h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+    }
+
+    &__toggle-btn {
+        background: none;
+        border: none;
+        color: colors.$color-white;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        &:focus {
+            outline: 2px solid colors.$color-white;
+            outline-offset: 2px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        mat-icon {
+            font-size: 1.2rem;
         }
     }
 

@@ -1,30 +1,32 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { HeaderComponent } from '../app/shared/components/header/header.component';
-import { ApiService } from './services/api.service';
-import { User } from './shared/models/user.model';
-import { MenuItem } from './shared/models/menu-item.model';
+import { AppState, loadUser, selectUserFullName } from './store';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, AsyncPipe, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   public title = 'bytebank';
-  public fullName: string = '';
+  public fullName$: Observable<string>;
+  public isAuthenticated$: Observable<boolean>;
 
-  private apiService = inject(ApiService);
+  private store = inject(Store<AppState>);
+  private authService = inject(AuthService);
 
-  ngOnInit(): void {
-    this.getUser();
+  constructor() {
+    this.fullName$ = this.store.select(selectUserFullName);
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
-  getUser() {
-    this.apiService.getUser().subscribe({
-      next: (data: User) => (this.fullName = data?.firstName + ' ' + data?.lastName),
-      error: (err: any) => console.error('Erro ao carregar usuário', err),
-    });
+  ngOnInit(): void {
+    this.store.dispatch(loadUser());
   }
 }

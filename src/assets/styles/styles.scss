@@ -1,4 +1,5 @@
 @use './_variables' as variables;
+@use './_accessibility';
 @use '@angular/material' as mat;
 @use './styles_theme-colors.scss' as theme-colors;
 

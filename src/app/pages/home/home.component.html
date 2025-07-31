@@ -1,17 +1,24 @@
 <div class="home">
-    <div class="sidebar">
+    <aside class="sidebar" role="navigation" aria-label="Menu lateral">
         <app-side-bar></app-side-bar>
-    </div>
-    <div class="welcome">
-        <app-welcome-card [userName]="userName" [amount]="amount">
+    </aside>
+    <section class="welcome" aria-label="Boas-vindas e saldo">
+        <app-welcome-card [userName]="(userName$ | async) || ''" [amount]="(amount$ | async) || 0">
         </app-welcome-card>
-    </div>
-    <div class="transactions">
+    </section>
+    <section class="transactions" aria-label="Gerenciar transações">
         <app-manage-item (itemSubmited)="createItem($event)">
         </app-manage-item>
-    </div>
-    <div class="extract">
-        <app-statement-items [statementItems]="statementItems" (edit)="openModal($event)" (delete)="deleteItem($event)">
+    </section>
+    <section class="extract" aria-label="Extrato de transações">
+        <app-transaction-filters></app-transaction-filters>
+        <app-statement-items 
+            [statementItems]="(statementItems$ | async) || []"
+            [loading]="(loading$ | async) || false"
+            [hasMore]="(hasMore$ | async) || false"
+            (edit)="openModal($event)" 
+            (delete)="deleteItem($event)"
+            (loadMore)="loadMoreTransactions()">
         </app-statement-items>
-    </div>
+    </section>
 </div>

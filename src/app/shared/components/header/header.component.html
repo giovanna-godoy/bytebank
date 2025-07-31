@@ -1,21 +1,36 @@
-<header class="header">
+<header class="header" role="banner">
     <div class="header__content">
-        <div class="header__menu">
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="header__menu-button">
-                <mat-icon class="header__menu-icon">menu</mat-icon>
+        <nav class="header__menu" role="navigation" aria-label="Menu principal">
+            <button 
+                mat-icon-button 
+                [matMenuTriggerFor]="menu" 
+                class="header__menu-button"
+                aria-label="Abrir menu de navegação"
+                aria-expanded="false"
+                aria-haspopup="true">
+                <mat-icon class="header__menu-icon" aria-hidden="true">menu</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item *ngFor="let menu of listMenu" (click)="navigateTo(menu.route)">
-                    {{ menu.title }}
+            <mat-menu #menu="matMenu" role="menu">
+                <button 
+                    mat-menu-item 
+                    *ngFor="let menuItem of listMenu; trackBy: trackByRoute" 
+                    (click)="navigateTo(menuItem.route)"
+                    role="menuitem"
+                    [attr.aria-label]="'Navegar para ' + menuItem.title">
+                    {{ menuItem.title }}
                 </button>
             </mat-menu>
-        </div>
-        <div class="header__content">
-            <span class="header__username">{{ userName }}</span>
-            <div class="header__icon" aria-label="Perfil do usuário">
-                <div class="header__icon" aria-label="Perfil do usuário">
-                    <img src="/assets/images/avatar.png" alt="Ícone de perfil" class="header__icon-img" />
-                </div>
+        </nav>
+        <div class="header__user-info">
+            <span class="header__username" [attr.aria-label]="'Usuário logado: ' + userName">{{ userName }}</span>
+            <div class="header__icon" role="img" aria-label="Avatar do usuário">
+                <img 
+                    src="/assets/images/avatar.png" 
+                    alt="Foto de perfil do usuário {{ userName }}" 
+                    class="header__icon-img" 
+                    tabindex="0"
+                    role="button"
+                    aria-label="Acessar perfil do usuário" />
             </div>
         </div>
     </div>

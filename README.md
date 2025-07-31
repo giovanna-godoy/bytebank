@@ -23,10 +23,24 @@ Para iniciar a API localmente, execute:
 npm run start:api
 ```
 
-Para iniciar o servidor local de desenvolvimento, execute:
+### Microfrontends
+
+Para iniciar apenas o shell (aplicação principal):
 
 ```bash
-npm run start
+npm run start:shell
+```
+
+Para iniciar apenas o MFE de investimentos:
+
+```bash
+npm run start:mfe
+```
+
+Para iniciar API + Shell + MFE simultaneamente:
+
+```bash
+npm run start:all
 ```
 
 ## Storybook

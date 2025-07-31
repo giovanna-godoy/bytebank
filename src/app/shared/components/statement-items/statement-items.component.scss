@@ -6,7 +6,7 @@
     background: colors.$color-light-gray;
     padding: 1rem;
     border-radius: 1em;
-    width: 90%;
+    width: 93%;
     height: 97%;
     max-height: 97%;
 
@@ -23,56 +23,141 @@
 
     &__list {
         margin-top: 1rem;
+        max-height: calc(100% - 4rem);
+        overflow-y: auto;
     }
 
     &__item {
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid colors.$color-success;
-        padding: 0.5rem 0;
+        padding: 0.5rem;
         line-height: 1.75rem;
         color: colors.$color-black;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
 
-        .statement__month {
-            font-size: 0.9rem;
-            color: colors.$color-success;
-            margin: 0;
-            text-transform: capitalize;
+        &:hover {
+            background-color: rgba(colors.$color-success, 0.1);
+            transform: translateX(4px);
         }
 
-        .statement__type {
-            font-size: 0.9rem;
-            margin: 0.2rem 0 0;
+        &:focus {
+            outline: 2px solid colors.$color-primary;
+            outline-offset: 2px;
+            background-color: rgba(colors.$color-primary, 0.1);
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    &__month {
+        font-size: 0.9rem;
+        color: colors.$color-success;
+        margin: 0;
+        text-transform: capitalize;
+    }
+
+    &__type {
+        font-size: 0.9rem;
+        margin: 0.2rem 0 0;
+    }
+
+    &__value {
+        font-weight: bold;
+        margin: 0;
+        font-size: 1rem;
+        color: colors.$color-black;
+    }
+
+    &__date {
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        color: colors.$color-gray;
+        white-space: nowrap;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    &__action-btn {
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 0.5rem;
+        background: transparent;
+        transition: all 0.2s ease;
+        position: relative;
+
+        &:hover {
+            transform: scale(1.1);
         }
 
-        .statement__value {
-            font-weight: bold;
-            margin: 0;
-            font-size: 1rem;
-            color: colors.$color-black;
+        &:focus {
+            outline: 2px solid colors.$color-primary;
+            outline-offset: 2px;
+            transform: scale(1.1);
         }
 
-        .statement__date {
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            color: colors.$color-gray;
-            white-space: nowrap;
+        &:active {
+            transform: scale(0.95);
         }
 
-        .statement__actions {
-            display: flex;
-            gap: 0.5rem;
-
-            button {
-                border: none;
-                border-radius: 100%;
-                cursor: pointer;
-
-                img {
-                    width: 2rem;
-                }
-            }
+        &--edit:hover {
+            background-color: rgba(colors.$color-success, 0.2);
         }
+
+        &--delete:hover {
+            background-color: rgba(colors.$color-error, 0.2);
+        }
+
+        img {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        color: colors.$color-gray;
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid colors.$color-light-gray;
+            border-top: 2px solid colors.$color-primary;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    }
+
+    &__end {
+        text-align: center;
+        padding: 1rem;
+        color: colors.$color-gray;
+        font-style: italic;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     @include tablet {

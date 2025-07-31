@@ -1,19 +1,19 @@
-<div class="welcome-card">
+<section class="welcome-card" role="region" aria-label="Informações de boas-vindas e saldo">
     <div class="welcome-card__column">
-        <div class="welcome-card__infos">
-            <div>
-                <p class="welcome-card__username">
+        <header class="welcome-card__infos">
+            <div class="welcome-card__greeting">
+                <h1 class="welcome-card__username" [attr.aria-label]="'Olá, ' + userName">
                     Olá, {{ userName }}! :)
-                </p>
-                <p class="welcome-card__date">
+                </h1>
+                <time class="welcome-card__date" [attr.datetime]="currentDate" [attr.aria-label]="'Data atual: ' + currentDate">
                     {{ currentDate }}
-                </p>
+                </time>
             </div>
-            <div class="welcome-card__amount">
+            <div class="welcome-card__amount" role="region" aria-label="Informações de saldo">
                 <app-amount [amount]="amount"></app-amount>
             </div>
-        </div>
-        <div class="welcome-card__footer">
+        </header>
+        <div class="welcome-card__footer" aria-hidden="true">
         </div>
     </div>
-</div>
+</section>

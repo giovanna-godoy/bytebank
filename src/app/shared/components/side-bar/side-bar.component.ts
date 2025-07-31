@@ -18,4 +18,8 @@ export class SideBarComponent {
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
+
+  trackByRoute(index: number, item: MenuItem): string {
+    return item.route;
+  }
 }

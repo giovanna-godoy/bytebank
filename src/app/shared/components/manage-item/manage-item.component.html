@@ -1,16 +1,91 @@
-<div class="manage-item">
+<section class="manage-item" role="region" [attr.aria-label]="(isEdit ? 'Editar' : 'Nova') + ' transação'">
     <div class="manage-item__column">
-        <div class="manage-item__infos">
-            <p class="manage-item__title">
+        <header class="manage-item__infos">
+            <h2 class="manage-item__title" id="form-title">
                 {{ isEdit ? 'Editar' : 'Nova'}} Transação
-            </p>
-            <div class="manage-item__form">
-                <app-select-field label="Selecione o tipo de transação" [options]="typeOptions" (selectionChange)="selectedType = $event" [selected]="selectedType"/>
-                <app-text-field label="Valor" type="number" (valueChange)="value = $event" [value]="value"/>
-                <app-date-field (dateSelected)="date = $event" [initialDate]="date"/>
-                <button mat-flat-button (click)="onSubmit()" [disabled]="!enableButton()">Concluir Transação</button>
-            </div>
-        </div>
-        <div class="manage-item__footer"></div>
+            </h2>
+            <form class="manage-item__form" role="form" aria-labelledby="form-title" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+                <app-select-field 
+                    label="Selecione o tipo de transação" 
+                    [options]="typeOptions" 
+                    (selectionChange)="selectedType = $event; transactionForm.get('type')?.setValue($event)" 
+                    [selected]="selectedType"
+                    [attr.aria-required]="true"/>
+                <div class="error-message" *ngIf="transactionForm.get('type')?.invalid && transactionForm.get('type')?.touched">
+                    {{ getErrorMessage('type') }}
+                </div>
+                
+                <app-text-field 
+                    label="Valor" 
+                    type="number" 
+                    (valueChange)="value = $event; transactionForm.get('value')?.setValue($event)" 
+                    [value]="value"
+                    [attr.aria-required]="true"/>
+                <div class="error-message" *ngIf="transactionForm.get('value')?.invalid && transactionForm.get('value')?.touched">
+                    {{ getErrorMessage('value') }}
+                </div>
+                
+                <app-date-field 
+                    (dateSelected)="date = $event; transactionForm.get('date')?.setValue($event)" 
+                    [initialDate]="date"
+                    [attr.aria-required]="true"/>
+                <div class="error-message" *ngIf="transactionForm.get('date')?.invalid && transactionForm.get('date')?.touched">
+                    {{ getErrorMessage('date') }}
+                </div>
+                
+                <mat-form-field class="full-width">
+                    <mat-label>Categoria</mat-label>
+                    <input type="text" matInput formControlName="category" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                            {{ category }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div class="error-message" *ngIf="transactionForm.get('category')?.invalid && transactionForm.get('category')?.touched">
+                    {{ getErrorMessage('category') }}
+                </div>
+                
+
+                <div class="attachment-section">
+                    <label class="attachment-label">
+                        <mat-icon>attach_file</mat-icon>
+                        Anexar recibos/documentos
+                        <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" hidden>
+                    </label>
+                    <!-- Anexos existentes (modo edição) -->
+                    <div class="attachments-list" *ngIf="isEdit && existingAttachments.length > 0">
+                        <div class="existing-attachments-label">Anexos existentes:</div>
+                        <div class="attachment-item existing-attachment" *ngFor="let fileName of existingAttachments; let i = index">
+                            <span>{{ fileName }}</span>
+                            <button type="button" mat-icon-button (click)="removeExistingAttachment(i)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Novos anexos -->
+                    <div class="attachments-list" *ngIf="attachments.length > 0">
+                        <div class="new-attachments-label" *ngIf="isEdit">Novos anexos:</div>
+                        <div class="attachment-item" *ngFor="let file of attachments; let i = index">
+                            <span>{{ file.name }}</span>
+                            <button type="button" mat-icon-button (click)="removeAttachment(i)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button 
+                    mat-flat-button 
+                    type="submit"
+                    [disabled]="!enableButton()"
+                    [attr.aria-label]="(isEdit ? 'Salvar alterações da' : 'Criar nova') + ' transação'"
+                    class="manage-item__submit-btn">
+                    {{ isEdit ? 'Salvar Alterações' : 'Concluir Transação' }}
+                </button>
+            </form>
+        </header>
+        <div class="manage-item__footer" aria-hidden="true"></div>
     </div>
-</div>
+</section>

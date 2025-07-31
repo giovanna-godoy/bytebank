@@ -1,34 +1,70 @@
-<section class="statement">
-  <div class="statement__header">
-    <h2>Extrato</h2>
-  </div>
+<section class="statement" role="region" aria-label="Extrato de transações">
+  <header class="statement__header">
+    <h2 id="extrato-title">Extrato</h2>
+  </header>
 
-  <div class="statement__list">
-    <div class="statement__item" *ngFor="let item of statementItems">
-      <div>
-        <p class="statement__month">
+  <div 
+    class="statement__list" 
+    role="list" 
+    aria-labelledby="extrato-title"
+    appInfiniteScroll
+    (scrolled)="onLoadMore()">
+    <article 
+      class="statement__item" 
+      *ngFor="let item of statementItems; trackBy: trackByItemId" 
+      role="listitem"
+      [attr.aria-label]="getItemAriaLabel(item)"
+      tabindex="0">
+      <div class="statement__info">
+        <p class="statement__month" role="text">
           {{ getMonth(item.date) || '' }}
         </p>
-        <p class="statement__type">
+        <p class="statement__type" role="text">
           {{ getType(item.type) || '' }}
         </p>
-        <p class="statement__value">
+        <p class="statement__value" role="text" [attr.aria-label]="'Valor: ' + getValue(item)">
           {{ getValue(item) }}
         </p>
       </div>
-      <div>
-        <p class="statement__date">
+      <div class="statement__meta">
+        <time 
+          class="statement__date" 
+          [attr.datetime]="item.date"
+          [attr.aria-label]="'Data da transação: ' + formatDate(item.date)">
           {{ formatDate(item.date) || '' }}
-        </p>
-        <div class="statement__actions">
-          <button aria-label="Editar" title="Editar Transação" (click)="editItem(item.id)">
-            <img src=" /assets/images/buttons/edit-button.png" alt="Editar" />
+        </time>
+        <div class="statement__actions" role="group" [attr.aria-label]="'Ações para transação de ' + getType(item.type)">
+          <button 
+            class="statement__action-btn statement__action-btn--edit"
+            (click)="editItem(item.id)"
+            (keydown.enter)="editItem(item.id)"
+            (keydown.space)="editItem(item.id)"
+            [attr.aria-label]="'Editar transação de ' + getType(item.type) + ' no valor de ' + getValue(item)"
+            type="button">
+            <img src="/assets/images/buttons/edit-button.png" alt="" aria-hidden="true" />
+            <span class="sr-only">Editar</span>
           </button>
-          <button aria-label="Excluir" title="Excluir Transação" (click)="deleteItem(item.id)">
-            <img src="/assets/images/buttons/delete-button.png" alt="Excluir" />
+          <button 
+            class="statement__action-btn statement__action-btn--delete"
+            (click)="deleteItem(item.id)"
+            (keydown.enter)="deleteItem(item.id)"
+            (keydown.space)="deleteItem(item.id)"
+            [attr.aria-label]="'Excluir transação de ' + getType(item.type) + ' no valor de ' + getValue(item)"
+            type="button">
+            <img src="/assets/images/buttons/delete-button.png" alt="" aria-hidden="true" />
+            <span class="sr-only">Excluir</span>
           </button>
         </div>
       </div>
+    </article>
+    
+    <div *ngIf="loading" class="statement__loading" role="status" aria-label="Carregando mais transações">
+      <div class="loading-spinner"></div>
+      <span>Carregando mais transações...</span>
+    </div>
+    
+    <div *ngIf="!hasMore && statementItems.length > 0" class="statement__end" role="status">
+      <span>Todas as transações foram carregadas</span>
     </div>
   </div>
 </section>

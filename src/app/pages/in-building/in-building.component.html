@@ -1,6 +1,14 @@
-<div class="in-building">
+<main class="in-building" role="main" aria-label="Página em construção">
     <div class="in-building__content">
-        <p>Em construção</p>
-        <button (click)="backToHome()">Voltar</button>
+        <h1>Página em Construção</h1>
+        <p>Esta funcionalidade estará disponível em breve.</p>
+        <button 
+            (click)="backToHome()"
+            (keydown.enter)="backToHome()"
+            (keydown.space)="backToHome()"
+            aria-label="Voltar para a página inicial"
+            class="back-button">
+            Voltar para Início
+        </button>
     </div>
-</div>
+</main>
