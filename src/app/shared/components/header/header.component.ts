@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import {MatMenuModule} from '@angular/material/menu';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent {
   @Input() userName:string = '';
 
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
@@ -25,5 +27,9 @@ export class HeaderComponent {
 
   trackByRoute(index: number, item: MenuItem): string {
     return item.route;
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

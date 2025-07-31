@@ -24,13 +24,28 @@
         <div class="header__user-info">
             <span class="header__username" [attr.aria-label]="'Usuário logado: ' + userName">{{ userName }}</span>
             <div class="header__icon" role="img" aria-label="Avatar do usuário">
-                <img 
-                    src="/assets/images/avatar.png" 
-                    alt="Foto de perfil do usuário {{ userName }}" 
-                    class="header__icon-img" 
-                    tabindex="0"
-                    role="button"
-                    aria-label="Acessar perfil do usuário" />
+                <button 
+                    mat-icon-button 
+                    [matMenuTriggerFor]="userMenu" 
+                    class="header__avatar-button"
+                    aria-label="Menu do usuário"
+                    aria-expanded="false"
+                    aria-haspopup="true">
+                    <img 
+                        src="/assets/images/avatar.png" 
+                        alt="Foto de perfil do usuário {{ userName }}" 
+                        class="header__icon-img" />
+                </button>
+                <mat-menu #userMenu="matMenu" role="menu">
+                    <button 
+                        mat-menu-item 
+                        (click)="logout()"
+                        role="menuitem"
+                        aria-label="Sair da conta">
+                        <mat-icon>logout</mat-icon>
+                        Sair
+                    </button>
+                </mat-menu>
             </div>
         </div>
     </div>

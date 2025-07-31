@@ -61,6 +61,33 @@
         }
     }
 
+    &__avatar-button {
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 50%;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        img {
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+
+            &:focus {
+                outline: 2px solid colors.$color-white;
+                outline-offset: 2px;
+                transform: scale(1.1);
+            }
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
     @include mobile {
         &__content {
             padding: 0.5em 1em;
