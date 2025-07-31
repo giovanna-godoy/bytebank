@@ -33,6 +33,14 @@
       "attachments": [
         "II Arraiá da família.png"
       ]
+    },
+    {
+      "id": "f05a",
+      "type": "DEPOSITO",
+      "value": 50,
+      "date": "2025-07-25",
+      "category": "Alimentação",
+      "attachments": []
     }
   ],
   "user": {
