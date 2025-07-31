@@ -20,7 +20,7 @@ npm install
 Para iniciar a API localmente, execute:
 
 ```bash
-npm run start:api
+npm run start:api:local
 ```
 
 ### Microfrontends
@@ -28,19 +28,19 @@ npm run start:api
 Para iniciar apenas o shell (aplicação principal):
 
 ```bash
-npm run start:shell
+npm run start:shell:local
 ```
 
 Para iniciar apenas o MFE de investimentos:
 
 ```bash
-npm run start:mfe
+npm run start:mfe:local
 ```
 
 Para iniciar API + Shell + MFE simultaneamente:
 
 ```bash
-npm run start:all
+npm run start:all:local
 ```
 
 ## Storybook

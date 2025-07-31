@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build
+RUN npm run build:all
 
 FROM nginx:alpine
 COPY --from=build /app/dist/bytebank/browser /usr/share/nginx/html
