@@ -122,21 +122,68 @@ const data = {
 
 module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
   res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-  const path = req.url;
+  let body = '';
+  req.on('data', chunk => body += chunk.toString());
+  req.on('end', () => {
+    try {
+      handleRequest(req, res, body);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+};
 
-  if (path === '/statement') return res.json(data.statement);
-  if (path === '/user') return res.json(data.user);
-  if (path === '/amount') return res.json(data.amount);
-  if (path === '/investments') return res.json(data.investments);
+function handleRequest(req, res, body) {
+
+  const [path, id] = req.url.split('/').filter(Boolean);
+
+  if (path === 'statement') {
+    if (req.method === 'GET') {
+      if (id) {
+        const item = data.statement.find(s => s.id === id);
+        return item ? res.json(item) : res.status(404).json({ error: 'Not found' });
+      }
+      return res.json(data.statement);
+    }
+    
+    if (req.method === 'POST') {
+      const parsedBody = body ? JSON.parse(body) : {};
+      const newItem = { id: Date.now().toString(), ...parsedBody };
+      data.statement.push(newItem);
+      return res.status(201).json(newItem);
+    }
+    
+    if ((req.method === 'PUT' || req.method === 'PATCH') && id) {
+      const index = data.statement.findIndex(s => s.id === id);
+      if (index === -1) return res.status(404).json({ error: 'Not found' });
+      const parsedBody = body ? JSON.parse(body) : {};
+      data.statement[index] = { ...data.statement[index], ...parsedBody };
+      return res.json(data.statement[index]);
+    }
+    
+    if (req.method === 'DELETE' && id) {
+      const index = data.statement.findIndex(s => s.id === id);
+      if (index === -1) return res.status(404).json({ error: 'Not found' });
+      const deleted = data.statement.splice(index, 1)[0];
+      return res.json(deleted);
+    }
+  }
+  
+  if (path === 'user') return res.json(data.user);
+  if (path === 'amount') return res.json(data.amount);
+  if (path === 'investments') return res.json(data.investments);
 
   res.status(404).json({ error: 'Not found' });
 };
