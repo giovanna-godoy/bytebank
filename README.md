@@ -71,6 +71,8 @@ docker-compose down
 * MFE Investments: https://bytebank-investments-mfe.vercel.app/
 * API: https://bytebank-api-gio.vercel.app/
 
+Os deploys foram feitos via CLI utilizando vercel --prod
+
 ## Vídeo da aplicação
 
 * Anexado no zip :)
