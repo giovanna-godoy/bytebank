@@ -1,31 +1,4 @@
-const data = {
-  "statement": [
-    { "id": 1, "type": "DEPOSITO", "value": 1500, "date": "2025-05-18" },
-    { "id": 2, "type": "DEPOSITO", "value": 100, "date": "2025-05-21" },
-    { "id": 3, "type": "DEPOSITO", "value": 50, "date": "2025-05-21" },
-    { "id": 4, "type": "TRANSFERENCIA", "value": 500, "date": "2025-05-21" }
-  ],
-  "user": { "id": 360843, "firstName": "Giovanna", "lastName": "Marinho de Godoy Lorente" },
-  "amount": { "value": 2500 },
-  "investments": {
-    "portfolio": [
-      { "type": "Renda Fixa", "percentage": 45, "color": "#004D61" },
-      { "type": "Renda Variável", "percentage": 30, "color": "#FF5031" },
-      { "type": "Fundos", "percentage": 15, "color": "#34A853" },
-      { "type": "Reserva", "percentage": 10, "color": "#999999" }
-    ],
-    "performance": [
-      { "month": "Jan", "yield": 2.1 }, { "month": "Fev", "yield": 1.8 },
-      { "month": "Mar", "yield": 3.2 }, { "month": "Abr", "yield": 2.7 },
-      { "month": "Mai", "yield": 4.1 }, { "month": "Jun", "yield": 3.5 }
-    ],
-    "products": [
-      { "type": "Renda Fixa", "description": "CDB, LCI, LCA", "yield": "12,5% a.a." },
-      { "type": "Renda Variável", "description": "Ações, FIIs", "yield": "+15% a.a." },
-      { "type": "Fundos", "description": "Multimercado", "yield": "8,2% a.a." }
-    ]
-  }
-};
+import { data } from './db.json';
 
 module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
