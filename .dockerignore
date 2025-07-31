@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.angular
+*.log
+.env
+.vercel
+projects/investments-mfe/node_modules
+projects/investments-mfe/dist
