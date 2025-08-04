@@ -30,9 +30,7 @@ const data = {
       "value": 50,
       "date": "2025-07-09",
       "category": "Alimentação",
-      "attachments": [
-        "II Arraiá da família.png"
-      ]
+      "attachments": []
     },
     {
       "id": "f05a",
