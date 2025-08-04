@@ -16,7 +16,9 @@
       "id": "3",
       "type": "DEPOSITO",
       "value": 50,
-      "date": "2025-05-21"
+      "date": "2025-05-21",
+      "category": "Outros",
+      "attachments": []
     },
     {
       "id": "4",
@@ -30,9 +32,7 @@
       "value": 50,
       "date": "2025-07-09",
       "category": "Alimentação",
-      "attachments": [
-        "II Arraiá da família.png"
-      ]
+      "attachments": []
     },
     {
       "id": "f05a",

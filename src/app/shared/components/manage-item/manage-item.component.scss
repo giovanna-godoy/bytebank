@@ -7,7 +7,7 @@
     position: relative;
     background-color: colors.$color-gray;
     color: colors.$color-white;
-    height: 65vh;
+    height: 75vh;
     width: 100%;
     border-radius: 1em;
     overflow: hidden;
@@ -307,10 +307,27 @@
             span {
                 font-size: 0.875rem;
                 word-break: break-all;
+                flex: 1;
 
                 @include mobile {
                     font-size: 0.8rem;
-                    max-width: 70%;
+                    max-width: 60%;
+                }
+            }
+
+            .attachment-actions {
+                display: flex;
+                gap: 0.25rem;
+                
+                button {
+                    width: 32px;
+                    height: 32px;
+                    
+                    mat-icon {
+                        font-size: 18px;
+                        width: 18px;
+                        height: 18px;
+                    }
                 }
             }
         }

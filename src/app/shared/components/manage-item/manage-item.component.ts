@@ -9,7 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { StatementItem, TransactionType } from '../../models/statement.model';
+import { StatementItem, TransactionType, AttachmentItem } from '../../models/statement.model';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import { Observable, map, startWith } from 'rxjs';
 
@@ -28,7 +28,8 @@ export class ManageItemComponent implements OnInit, OnChanges {
   public category: string = '';
 
   public attachments: File[] = [];
-  public existingAttachments: string[] = [];
+  public existingAttachments: AttachmentItem[] = [];
+  public attachmentsBase64: AttachmentItem[] = [];
 
   public transactionForm: FormGroup;
   public categories: string[] = ['Alimentação', 'Transporte', 'Saúde', 'Educação', 'Lazer', 'Moradia', 'Vestuário', 'Outros'];
@@ -88,7 +89,10 @@ export class ManageItemComponent implements OnInit, OnChanges {
         category: (this.selectedItem as any)?.category || 'Outros'
       });
 
-      this.existingAttachments = (this.selectedItem as any)?.attachments || [];
+      const attachments = (this.selectedItem as any)?.attachments || [];
+      this.existingAttachments = Array.isArray(attachments) && attachments.length > 0 && typeof attachments[0] === 'object' 
+        ? attachments 
+        : attachments.map((name: string) => ({ name }));
 
       this.transactionForm.markAllAsTouched();
     }
@@ -105,7 +109,22 @@ export class ManageItemComponent implements OnInit, OnChanges {
     const files = event.target.files;
     if (files) {
       this.attachments = Array.from(files);
+      this.convertFilesToBase64(Array.from(files));
     }
+  }
+
+  private convertFilesToBase64(files: File[]): void {
+    this.attachmentsBase64 = [];
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.attachmentsBase64.push({
+          name: file.name,
+          base64: reader.result as string
+        });
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
   removeAttachment(index: number): void {
@@ -116,6 +135,15 @@ export class ManageItemComponent implements OnInit, OnChanges {
     this.existingAttachments.splice(index, 1);
   }
 
+  downloadAttachment(attachment: AttachmentItem): void {
+    if (attachment.base64) {
+      const link = document.createElement('a');
+      link.href = attachment.base64;
+      link.download = attachment.name;
+      link.click();
+    }
+  }
+
   enableButton(): boolean {
     return this.transactionForm.valid;
   }
@@ -123,12 +151,17 @@ export class ManageItemComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.transactionForm.valid) {
       const formValue = this.transactionForm.value;
+      const allAttachments = [
+        ...this.existingAttachments,
+        ...this.attachmentsBase64
+      ];
+
       const payload = {
         type: formValue.type,
         value: typeof formValue.value === 'string' ? parseFloat(formValue.value) : formValue.value,
         date: formValue.date,
         category: formValue.category,
-        attachments: this.attachments.map(file => file.name)
+        attachments: allAttachments
       };
 
       this.isEdit ? this.itemEdited.emit({ id: this.itemId, ...payload }) : this.itemSubmited.emit(payload);

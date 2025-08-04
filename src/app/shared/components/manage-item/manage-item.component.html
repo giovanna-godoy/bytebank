@@ -56,11 +56,16 @@
                     <!-- Anexos existentes (modo edição) -->
                     <div class="attachments-list" *ngIf="isEdit && existingAttachments.length > 0">
                         <div class="existing-attachments-label">Anexos existentes:</div>
-                        <div class="attachment-item existing-attachment" *ngFor="let fileName of existingAttachments; let i = index">
-                            <span>{{ fileName }}</span>
-                            <button type="button" mat-icon-button (click)="removeExistingAttachment(i)">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                        <div class="attachment-item existing-attachment" *ngFor="let attachment of existingAttachments; let i = index">
+                            <span>{{ attachment.name }}</span>
+                            <div class="attachment-actions">
+                                <button type="button" mat-icon-button (click)="downloadAttachment(attachment)" *ngIf="attachment.base64">
+                                    <mat-icon>download</mat-icon>
+                                </button>
+                                <button type="button" mat-icon-button (click)="removeExistingAttachment(i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     
