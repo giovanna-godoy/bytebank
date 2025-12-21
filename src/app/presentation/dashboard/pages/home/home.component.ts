@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -31,7 +31,8 @@ import { GetTransactionByIdUseCase } from '../../../../domain/usecases/transacti
   standalone: true,
   imports: [SideBarComponent, WelcomeCardComponent, StatementItemsComponent, ManageItemComponent, TransactionFiltersComponent, AsyncPipe],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   public userName$: Observable<string>;
