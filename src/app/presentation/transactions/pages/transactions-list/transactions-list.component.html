@@ -1,0 +1,13 @@
+<div class="transactions-container">
+  <h2>Transações</h2>
+  
+  <div class="transactions-list">
+    <div *ngFor="let transaction of transactions" class="transaction-item">
+      <div class="transaction-info">
+        <span class="type">{{ transaction.type }}</span>
+        <span class="date">{{ transaction.date | date }}</span>
+      </div>
+      <span class="value">R$ {{ transaction.value | number:'1.2-2' }}</span>
+    </div>
+  </div>
+</div>

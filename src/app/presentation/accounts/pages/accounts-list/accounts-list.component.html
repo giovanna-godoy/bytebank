@@ -1,0 +1,10 @@
+<div class="accounts-container">
+  <h2>Contas</h2>
+  
+  <div class="accounts-list">
+    <div *ngFor="let account of accounts" class="account-item">
+      <h3>{{ account.name }}</h3>
+      <p>Saldo: R$ {{ account.balance | number:'1.2-2' }}</p>
+    </div>
+  </div>
+</div>
