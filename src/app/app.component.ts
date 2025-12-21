@@ -4,8 +4,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HeaderComponent } from './presentation/shared/components/header/header.component';
-import { AppState, loadUser, selectUserFullName } from './store';
-import { IAuthRepository } from './domain/repositories/auth.repository';
+import { AppState, loadUser, selectUserFullName, checkAuth, selectIsAuthenticated } from './store';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +18,14 @@ export class AppComponent implements OnInit {
   public isAuthenticated$: Observable<boolean>;
 
   private store = inject(Store<AppState>);
-  private authRepository = inject(IAuthRepository);
 
   constructor() {
     this.fullName$ = this.store.select(selectUserFullName);
-    this.isAuthenticated$ = this.authRepository.isAuthenticated$;
+    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
   }
 
   ngOnInit(): void {
+    this.store.dispatch(checkAuth());
     this.store.dispatch(loadUser());
   }
 }

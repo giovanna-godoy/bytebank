@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { SharedModule } from '../../../shared/shared.module';
-import { LoginUseCase } from '../../../../domain/usecases/auth/login.usecase';
+import { login } from '../../../../store/auth/auth.actions';
+import { selectAuthLoading, selectAuthError } from '../../../../store/auth/auth.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +15,11 @@ import { LoginUseCase } from '../../../../domain/usecases/auth/login.usecase';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  private loginUseCase = inject(LoginUseCase);
-  private router = inject(Router);
+  private store = inject(Store);
   private fb = inject(FormBuilder);
+
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
+  error$: Observable<string | null> = this.store.select(selectAuthError);
 
   loginForm: FormGroup = this.fb.group({
     email: ['user@bytebank.com', [Validators.required, Validators.email]],
@@ -24,13 +29,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      const success = this.loginUseCase.execute(email, password);
-      
-      if (success) {
-        this.router.navigate(['/dashboard']);
-      } else {
-        alert('Credenciais inválidas');
-      }
+      this.store.dispatch(login({ email, password }));
     }
   }
 }

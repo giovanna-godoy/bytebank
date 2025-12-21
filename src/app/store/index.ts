@@ -1,16 +1,20 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { AppState } from './app.state';
+import { authReducer } from './auth/auth.reducer';
 import { userReducer } from './user/user.reducer';
 import { transactionsReducer } from './transactions/transactions.reducer';
 import { uiReducer } from './ui/ui.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
+  auth: authReducer,
   user: userReducer,
   transactions: transactionsReducer,
   ui: uiReducer
 };
 
 export * from './app.state';
+export * from './auth/auth.actions';
+export * from './auth/auth.selectors';
 export * from './user/user.actions';
 export * from './user/user.selectors';
 export * from './transactions/transactions.actions';
