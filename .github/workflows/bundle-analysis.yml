@@ -1,0 +1,68 @@
+name: Bundle Analysis
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  bundle-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build for analysis
+        run: |
+          npm run build:prod -- --stats-json
+          npm run build:mfe -- --stats-json
+      
+      - name: Analyze bundle size
+        run: |
+          npx webpack-bundle-analyzer dist/bytebank/stats.json --mode json > bundle-report.json
+          echo "## Bundle Analysis Report" >> $GITHUB_STEP_SUMMARY
+          echo "### Main Bundle" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+          cat bundle-report.json | jq '.assets[] | select(.name | endswith(".js")) | {name, size}' >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Check bundle size limits
+        run: |
+          MAIN_BUNDLE_SIZE=$(cat dist/bytebank/stats.json | jq '.assets[] | select(.name | contains("main")) | .size')
+          VENDOR_BUNDLE_SIZE=$(cat dist/bytebank/stats.json | jq '.assets[] | select(.name | contains("vendor")) | .size')
+          
+          echo "Main bundle size: $MAIN_BUNDLE_SIZE bytes"
+          echo "Vendor bundle size: $VENDOR_BUNDLE_SIZE bytes"
+          
+          # Fail if main bundle > 500KB
+          if [ "$MAIN_BUNDLE_SIZE" -gt 512000 ]; then
+            echo "❌ Main bundle size exceeds 500KB limit"
+            exit 1
+          fi
+          
+          # Fail if vendor bundle > 2MB
+          if [ "$VENDOR_BUNDLE_SIZE" -gt 2097152 ]; then
+            echo "❌ Vendor bundle size exceeds 2MB limit"
+            exit 1
+          fi
+          
+          echo "✅ Bundle sizes within limits"
+      
+      - name: Upload bundle analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis
+          path: |
+            dist/bytebank/stats.json
+            bundle-report.json
