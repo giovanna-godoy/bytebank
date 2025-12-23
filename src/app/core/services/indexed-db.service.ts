@@ -16,8 +16,8 @@ export class IndexedDBService {
         resolve();
       };
 
-      request.onupgradeneeded = (event: any) => {
-        const db = event.target.result;
+      request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+        const db = (event.target as IDBOpenDBRequest).result;
         
         if (!db.objectStoreNames.contains('transactions')) {
           db.createObjectStore('transactions', { keyPath: 'id', autoIncrement: true });
@@ -33,8 +33,12 @@ export class IndexedDBService {
   async set(storeName: string, value: any): Promise<void> {
     if (!this.db) await this.initialize();
     
+    if (!this.db) {
+      throw new Error('Failed to initialize IndexedDB');
+    }
+    
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([storeName], 'readwrite');
+      const transaction = this.db.transaction([storeName], 'readwrite');
       const store = transaction.objectStore(storeName);
       const request = store.put(value);
 
@@ -46,8 +50,12 @@ export class IndexedDBService {
   async get<T>(storeName: string, key: any): Promise<T | null> {
     if (!this.db) await this.initialize();
     
+    if (!this.db) {
+      throw new Error('Failed to initialize IndexedDB');
+    }
+    
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([storeName], 'readonly');
+      const transaction = this.db.transaction([storeName], 'readonly');
       const store = transaction.objectStore(storeName);
       const request = store.get(key);
 

@@ -27,7 +27,7 @@ describe('SecureStorageService', () => {
     cryptoService.decrypt.and.returnValue(Promise.resolve(value));
 
     await service.setItem(key, value);
-    expect(cryptoService.encrypt).toHaveBeenCalledWith(value);
+    expect(cryptoService.encrypt).toHaveBeenCalledWith(value, jasmine.any(Object));
 
     const retrieved = await service.getItem(key);
     expect(retrieved).toBe(value);

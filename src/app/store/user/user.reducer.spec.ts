@@ -9,27 +9,26 @@ describe('UserReducer', () => {
     expect(state).toBe(initialState);
   });
 
-  it('should handle loadUserProfile', () => {
-    const action = UserActions.loadUserProfile();
+  it('should handle loadUser', () => {
+    const action = UserActions.loadUser();
     const state = userReducer(initialState, action);
 
     expect(state.loading).toBe(true);
     expect(state.error).toBe(null);
   });
 
-  it('should handle loadUserProfileSuccess', () => {
-    const user = { id: '1', name: 'Test User', email: 'test@test.com' };
-    const action = UserActions.loadUserProfileSuccess({ user });
+  it('should handle loadUserSuccess', () => {
+    const user = { id: 1, firstName: 'Test', lastName: 'User' };
+    const action = UserActions.loadUserSuccess({ user });
     const state = userReducer(initialState, action);
 
     expect(state.loading).toBe(false);
-    expect(state.user).toEqual(user);
+    expect(state.currentUser).toEqual(user);
     expect(state.error).toBe(null);
   });
 
-  it('should handle updateUserProfile', () => {
-    const updates = { name: 'Updated Name' };
-    const action = UserActions.updateUserProfile({ updates });
+  it('should handle loadAmount', () => {
+    const action = UserActions.loadAmount();
     const state = userReducer(initialState, action);
 
     expect(state.loading).toBe(true);

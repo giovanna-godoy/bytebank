@@ -19,13 +19,13 @@ describe('TransactionsReducer', () => {
 
   it('should handle loadTransactionsSuccess', () => {
     const transactions = [
-      { id: '1', amount: 100, description: 'Test', date: new Date(), type: 'income' }
+      { id: 1, value: 100, type: 'DEPOSITO', date: '2024-01-01' }
     ];
     const action = TransactionsActions.loadTransactionsSuccess({ transactions });
     const state = transactionsReducer(initialState, action);
 
     expect(state.loading).toBe(false);
-    expect(state.transactions).toEqual(transactions);
+    expect(state.items).toEqual(transactions);
     expect(state.error).toBe(null);
   });
 

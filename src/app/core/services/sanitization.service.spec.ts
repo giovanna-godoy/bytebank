@@ -25,7 +25,7 @@ describe('SanitizationService', () => {
     const validInput = 'valid@email.com';
     const invalidInput = '<script>alert("xss")</script>';
     
-    expect(service.validateInput(validInput)).toBe(true);
-    expect(service.validateInput(invalidInput)).toBe(false);
+    expect(service.sanitizeInput(validInput)).toBe('valid@email.com');
+    expect(service.sanitizeInput(invalidInput)).toBe('scriptalert("xss")/script');
   });
 });

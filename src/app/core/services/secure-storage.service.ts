@@ -45,7 +45,18 @@ export class SecureStorageService {
     sessionStorage.removeItem(key);
   }
 
+  clearData(): void {
+    // Clear all data except encryption key
+    const keys = Object.keys(sessionStorage);
+    keys.forEach(key => {
+      if (key !== this.KEY_STORAGE) {
+        sessionStorage.removeItem(key);
+      }
+    });
+  }
+
   clear(): void {
     sessionStorage.clear();
+    this.encryptionKey = null;
   }
 }

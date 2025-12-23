@@ -22,7 +22,7 @@ describe('GetTransactionsUseCase', () => {
 
   it('should return transactions', (done) => {
     const mockTransactions = [
-      { id: '1', description: 'Test', amount: 100, date: '2025-01-01', type: 'income' }
+      { id: 1, value: 100, date: '2025-01-01', type: 'DEPOSITO' }
     ];
     mockRepository.getAll.and.returnValue(of(mockTransactions));
 
