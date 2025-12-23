@@ -23,14 +23,18 @@ export class LoginComponent {
   showPassword = false;
 
   loginForm: FormGroup = this.fb.group({
-    email: ['user@bytebank.com', [Validators.required, Validators.email]],
-    password: ['Fiap@2025', Validators.required]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
+      console.log('Login attempt:', email);
       this.store.dispatch(login({ email, password }));
+    } else {
+      console.log('Form invalid:', this.loginForm.errors);
+      this.loginForm.markAllAsTouched();
     }
   }
 
