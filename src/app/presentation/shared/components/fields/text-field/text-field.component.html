@@ -2,12 +2,14 @@
     <mat-label>{{ label }}</mat-label>
     <input 
         matInput 
-        [type]="type" 
+        [type]="type === 'number' ? 'text' : type" 
         [value]="value" 
         (input)="onInputChange($event)"
+        (keypress)="onKeyPress($event)"
         [attr.aria-label]="label"
         [attr.aria-required]="required"
         [attr.aria-describedby]="errorId"
-        [id]="fieldId">
+        [id]="fieldId"
+        [placeholder]="type === 'number' ? '0,00' : ''">
     <mat-error [id]="errorId" *ngIf="hasError">{{ errorMessage }}</mat-error>
 </mat-form-field>

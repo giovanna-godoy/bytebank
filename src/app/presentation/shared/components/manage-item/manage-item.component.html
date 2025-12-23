@@ -10,28 +10,20 @@
                     [options]="typeOptions" 
                     (selectionChange)="selectedType = $event; transactionForm.get('type')?.setValue($event)" 
                     [selected]="selectedType"
-                    [attr.aria-required]="true"/>
-                <div class="error-message" *ngIf="transactionForm.get('type')?.invalid && transactionForm.get('type')?.touched">
-                    {{ getErrorMessage('type') }}
-                </div>
+                    [required]="true"/>
                 
                 <app-text-field 
                     label="Valor" 
                     type="number" 
                     (valueChange)="value = $event; transactionForm.get('value')?.setValue($event)" 
                     [value]="value"
-                    [attr.aria-required]="true"/>
-                <div class="error-message" *ngIf="transactionForm.get('value')?.invalid && transactionForm.get('value')?.touched">
-                    {{ getErrorMessage('value') }}
-                </div>
+                    [required]="true"/>
                 
                 <app-date-field 
+                    label="Data"
                     (dateSelected)="date = $event; transactionForm.get('date')?.setValue($event)" 
                     [initialDate]="date"
-                    [attr.aria-required]="true"/>
-                <div class="error-message" *ngIf="transactionForm.get('date')?.invalid && transactionForm.get('date')?.touched">
-                    {{ getErrorMessage('date') }}
-                </div>
+                    [required]="true"/>
                 
                 <mat-form-field class="full-width">
                     <mat-label>Categoria</mat-label>
@@ -41,10 +33,10 @@
                             {{ category }}
                         </mat-option>
                     </mat-autocomplete>
+                    <mat-error *ngIf="transactionForm.get('category')?.invalid && transactionForm.get('category')?.touched">
+                        {{ getErrorMessage('category') }}
+                    </mat-error>
                 </mat-form-field>
-                <div class="error-message" *ngIf="transactionForm.get('category')?.invalid && transactionForm.get('category')?.touched">
-                    {{ getErrorMessage('category') }}
-                </div>
                 
 
                 <div class="attachment-section">
@@ -87,7 +79,7 @@
                     [disabled]="!enableButton()"
                     [attr.aria-label]="(isEdit ? 'Salvar alterações da' : 'Criar nova') + ' transação'"
                     class="manage-item__submit-btn">
-                    {{ isEdit ? 'Salvar Alterações' : 'Concluir Transação' }}
+                    {{ isEdit ? 'Salvar Alterações' : 'Criar nova Transação' }}
                 </button>
             </form>
         </header>
