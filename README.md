@@ -2,7 +2,7 @@
 
 ![Bytebank Logo](src/assets/images/ByteBank-Logo.png)
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Sistema bancário moderno desenvolvido com **Angular 19** aplicando **Clean Architecture**, **microfrontends** e **PWA**. Evolução do Tech Challenge 2 para o Tech Challenge 4 da FIAP.
 
@@ -29,7 +29,7 @@ src/
 - **Shell**: Aplicação principal
 - **MFE Investments**: Módulo de investimentos independente
 
-## 🚀 Tecnologias
+## Tecnologias
 
 - **Angular 19** - Framework principal
 - **NgRx** - Gerenciamento de estado
@@ -72,11 +72,11 @@ npm run storybook          # Documentação componentes
 docker-compose up -d       # Ambiente completo
 ```
 
-## 🔐 Credenciais de Acesso
+## Credenciais de Acesso
 
 Disponíveis no txt via portal do aluno
 
-## 🎯 Funcionalidades
+## Funcionalidades
 
 ### Implementadas
 - **Autenticação JWT** com refresh token
@@ -113,7 +113,6 @@ Disponíveis no txt via portal do aluno
 ## PWA Features
 
 - ✅ Funciona offline
-- ✅ Instalável no dispositivo
 - ✅ Cache inteligente
 - ✅ Sincronização automática
 
