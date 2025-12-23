@@ -19,6 +19,8 @@
     "build:all": "npm run build && npm run build:mfe",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
     "test:watch": "ng test",
     "test:coverage": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
     "e2e": "cypress run",
