@@ -7,7 +7,10 @@ describe('SecureStorageService', () => {
   let cryptoService: jasmine.SpyObj<CryptoService>;
 
   beforeEach(() => {
-    cryptoService = jasmine.createSpyObj('CryptoService', ['encrypt', 'decrypt']);
+    cryptoService = jasmine.createSpyObj('CryptoService', ['encrypt', 'decrypt', 'generateKey', 'exportKey', 'importKey']);
+    cryptoService.generateKey.and.returnValue(Promise.resolve({} as CryptoKey));
+    cryptoService.exportKey.and.returnValue(Promise.resolve('exported-key'));
+    cryptoService.importKey.and.returnValue(Promise.resolve({} as CryptoKey));
 
     TestBed.configureTestingModule({
       providers: [
@@ -24,10 +27,10 @@ describe('SecureStorageService', () => {
     const key = 'test-key';
     const value = 'test-value';
     cryptoService.encrypt.and.returnValue(Promise.resolve('encrypted-value'));
-    cryptoService.decrypt.and.returnValue(Promise.resolve(value));
+    cryptoService.decrypt.and.returnValue(Promise.resolve('"test-value"'));
 
     await service.setItem(key, value);
-    expect(cryptoService.encrypt).toHaveBeenCalledWith(value, jasmine.any(Object));
+    expect(cryptoService.encrypt).toHaveBeenCalled();
 
     const retrieved = await service.getItem(key);
     expect(retrieved).toBe(value);

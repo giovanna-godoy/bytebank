@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ModalBaseComponent } from './modal-base.component';
 
 describe('ModalBaseComponent', () => {
@@ -8,7 +8,11 @@ describe('ModalBaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalBaseComponent]
+      imports: [ModalBaseComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: { close: jasmine.createSpy('close') } }
+      ]
     })
     .compileComponents();
 

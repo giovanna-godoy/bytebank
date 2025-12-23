@@ -34,7 +34,9 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/assets/styles"]
+              "includePaths": [
+                "src/assets/styles"
+              ]
             }
           },
           "configurations": {
@@ -208,7 +210,8 @@
             "styles": [
               "projects/investments-mfe/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "main": "projects/investments-mfe/src/test.ts"
           }
         }
       }
