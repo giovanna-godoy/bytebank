@@ -1,23 +1,73 @@
 <div class="login-container">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h2>Login - Bytebank</h2>
-    
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" />
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">
+        <h1>Bytebank</h1>
+        <div class="logo-accent"></div>
+      </div>
+      <p class="welcome-text">Bem-vindo de volta!</p>
     </div>
 
-    <div class="form-group">
-      <label for="password">Senha</label>
-      <input id="password" type="password" formControlName="password" />
-    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-wrapper">
+          <input 
+            id="email" 
+            type="email" 
+            formControlName="email" 
+            placeholder="Digite seu email"
+            [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          />
+        </div>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="field-error">
+          Email é obrigatório e deve ser válido
+        </div>
+      </div>
 
-    <div *ngIf="error$ | async as error" class="error-message">
-      {{ error }}
-    </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <div class="input-wrapper">
+          <input 
+            id="password" 
+            [type]="showPassword ? 'text' : 'password'" 
+            formControlName="password" 
+            placeholder="Digite sua senha"
+            [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          />
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="field-error">
+          Senha é obrigatória
+        </div>
+      </div>
 
-    <button type="submit" [disabled]="loginForm.invalid || (loading$ | async)">  
-      {{ (loading$ | async) ? 'Entrando...' : 'Entrar' }}
-    </button>
-  </form>
+      <div *ngIf="error$ | async as error" class="error-message">
+        <span class="error-icon">⚠️</span>
+        {{ error }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="login-button"
+        [disabled]="loginForm.invalid || (loading$ | async)"
+        [class.loading]="loading$ | async"
+      >  
+        <span *ngIf="!(loading$ | async)">Entrar</span>
+        <span *ngIf="loading$ | async" class="loading-content">
+          <span class="spinner"></span>
+          Entrando...
+        </span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>Esqueceu sua senha? <a href="#" class="link">Clique aqui</a></p>
+    </div>
+  </div>
+
+  <div class="background-decoration">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
 </div>

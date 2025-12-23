@@ -20,6 +20,7 @@ export class LoginComponent {
 
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   error$: Observable<string | null> = this.store.select(selectAuthError);
+  showPassword = false;
 
   loginForm: FormGroup = this.fb.group({
     email: ['user@bytebank.com', [Validators.required, Validators.email]],
@@ -31,5 +32,9 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       this.store.dispatch(login({ email, password }));
     }
+  }
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 }

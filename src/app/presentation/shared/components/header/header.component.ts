@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
-import { IAuthRepository } from '../../../../domain/repositories/auth.repository';
+import { Store } from '@ngrx/store';
+import { logout } from '../../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent {
   @Input() userName:string = '';
 
   private router = inject(Router);
-  private authRepository = inject(IAuthRepository);
+  private store = inject(Store);
 
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
@@ -30,6 +31,6 @@ export class HeaderComponent {
   }
 
   logout(): void {
-    this.authRepository.logout();
+    this.store.dispatch(logout());
   }
 }
