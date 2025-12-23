@@ -5,25 +5,38 @@
                 {{ isEdit ? 'Editar' : 'Nova'}} Transação
             </h2>
             <form class="manage-item__form" role="form" aria-labelledby="form-title" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
-                <app-select-field 
-                    label="Selecione o tipo de transação" 
-                    [options]="typeOptions" 
-                    (selectionChange)="selectedType = $event; transactionForm.get('type')?.setValue($event)" 
-                    [selected]="selectedType"
-                    [required]="true"/>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Selecione o tipo de transação</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option [value]="option.type" *ngFor="let option of typeOptions">
+                            {{ option.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="transactionForm.get('type')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
                 
-                <app-text-field 
-                    label="Valor" 
-                    type="number" 
-                    (valueChange)="value = $event; transactionForm.get('value')?.setValue($event)" 
-                    [value]="value"
-                    [required]="true"/>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" formControlName="value" placeholder="0,00">
+                    <mat-error *ngIf="transactionForm.get('value')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                    <mat-error *ngIf="transactionForm.get('value')?.hasError('min')">
+                        Valor deve ser maior que zero
+                    </mat-error>
+                </mat-form-field>
                 
-                <app-date-field 
-                    label="Data"
-                    (dateSelected)="date = $event; transactionForm.get('date')?.setValue($event)" 
-                    [initialDate]="date"
-                    [required]="true"/>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Data</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="transactionForm.get('date')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
                 
                 <mat-form-field class="full-width">
                     <mat-label>Categoria</mat-label>

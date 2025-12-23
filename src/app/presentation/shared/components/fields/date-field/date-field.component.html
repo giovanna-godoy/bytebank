@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill" class="date-field">
-  <mat-label>{{ label }}</mat-label>
+  <mat-label>{{ label }} <span *ngIf="required" class="required-asterisk">*</span></mat-label>
   <input 
     matInput 
     [matDatepicker]="picker" 
@@ -16,5 +16,5 @@
     [attr.aria-label]="'Abrir calendário para ' + label">
   </mat-datepicker-toggle>
   <mat-datepicker #picker [attr.aria-label]="'Calendário para seleção de data'"></mat-datepicker>
-  <mat-error [id]="errorId" *ngIf="hasError">{{ errorMessage }}</mat-error>
+  <mat-error [id]="errorId" *ngIf="error">{{ error }}</mat-error>
 </mat-form-field>

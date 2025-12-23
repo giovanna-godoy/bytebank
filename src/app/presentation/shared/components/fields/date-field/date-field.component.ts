@@ -20,6 +20,7 @@ export class DateFieldComponent implements OnInit {
   @Input() label = 'Data';
   @Input() initialDate: Date | string = '';
   @Input() required: boolean = false;
+  @Input() error: string = '';
 
   @Output() dateSelected = new EventEmitter<string>();
 
@@ -36,7 +37,11 @@ export class DateFieldComponent implements OnInit {
 
   onDateChange(event: any) {
     const date = event.value.toLocaleDateString('pt-BR');
-    this.validateDate(event.value);
+    if (this.required && !event.value) {
+      this.error = 'Campo obrigatório';
+    } else {
+      this.error = '';
+    }
     this.dateSelected.emit(formatDate(date, 'YYYY-MM-DD', 'DD/MM/YYYY'));
   }
 

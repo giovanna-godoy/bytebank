@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { IAuthRepository } from '../../domain/repositories/auth.repository';
+import { IndexedDBService } from '../../core/services/indexed-db.service';
 import * as AuthActions from './auth.actions';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class AuthEffects {
   private actions$ = inject(Actions);
   private authRepository = inject(IAuthRepository);
   private router = inject(Router);
+  private indexedDB = inject(IndexedDBService);
 
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -81,9 +83,20 @@ export class AuthEffects {
     )
   );
 
-  private storeTokensSecurely(token: string, refreshToken: string): void {
-    const encrypted = btoa(JSON.stringify({ token, refreshToken, timestamp: Date.now() }));
+  private async storeTokensSecurely(token: string, refreshToken: string): Promise<void> {
+    const tokenData = { token, refreshToken, timestamp: Date.now() };
+    const encrypted = btoa(JSON.stringify(tokenData));
+    
+    // Store in sessionStorage for immediate access
     sessionStorage.setItem('auth_data', encrypted);
+    
+    // Store in IndexedDB for offline access
+    try {
+      await this.indexedDB.initialize();
+      await this.indexedDB.set('auth', tokenData);
+    } catch (error) {
+      console.warn('IndexedDB storage failed, using sessionStorage only');
+    }
   }
 
   private getStoredToken(): string | null {

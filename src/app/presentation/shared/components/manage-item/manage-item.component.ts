@@ -1,21 +1,20 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TextFieldComponent } from '../fields/text-field/text-field.component';
-import { SelectFieldComponent } from '../fields/select-field/select-field.component';
-import { DateFieldComponent } from '../fields/date-field/date-field.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { StatementItem, TransactionType, AttachmentItem } from '../../models/statement.model';
-import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-manage-item',
-  imports: [TextFieldComponent, SelectFieldComponent, DateFieldComponent, CommonModule, MatButtonModule, FormsModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, FormsModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './manage-item.component.html',
   styleUrl: './manage-item.component.scss'
 })
@@ -59,6 +58,11 @@ export class ManageItemComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setOptions();
     this.setValues();
+    
+    // Força atualização de erros quando campos mudam
+    this.transactionForm.valueChanges.subscribe(() => {
+      // Trigger change detection
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -149,6 +153,12 @@ export class ManageItemComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
+    if (this.transactionForm.invalid) {
+      // Marca todos os campos como touched para mostrar erros
+      this.transactionForm.markAllAsTouched();
+      return;
+    }
+
     if (this.transactionForm.valid) {
       const formValue = this.transactionForm.value;
       const allAttachments = [
@@ -176,7 +186,11 @@ export class ManageItemComponent implements OnInit, OnChanges {
     if (control?.hasError('min')) {
       return 'Valor deve ser maior que zero';
     }
-
     return '';
+  }
+
+  // Marca campos como touched para mostrar erros
+  markFieldAsTouched(field: string): void {
+    this.transactionForm.get(field)?.markAsTouched();
   }
 }

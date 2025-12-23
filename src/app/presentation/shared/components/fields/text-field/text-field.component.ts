@@ -14,12 +14,22 @@ export class TextFieldComponent {
   @Input() value: string | number = "";
   @Input() type: string = "";
   @Input() required: boolean = false;
-  @Input() errorMessage: string = "";
+  @Input() error: string = "";
   @Output() valueChange = new EventEmitter<string | number>();
+  @Output() blur = new EventEmitter<void>();
 
   fieldId = `text-field-${Math.random().toString(36).substr(2, 9)}`;
   errorId = `${this.fieldId}-error`;
   hasError = false;
+
+  onBlur(event: Event): void {
+    // Valida o campo ao sair
+    const input = event.target as HTMLInputElement;
+    if (this.required && !input.value) {
+      this.error = 'Campo obrigatório';
+    }
+    this.blur.emit();
+  }
 
   onInputChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -67,7 +77,7 @@ export class TextFieldComponent {
   private validateNumber(value: string): void {
     if (this.required && !value.trim()) {
       this.hasError = true;
-      this.errorMessage = `${this.label} é obrigatório`;
+      this.error = `${this.label} é obrigatório`;
       return;
     }
     
@@ -77,36 +87,36 @@ export class TextFieldComponent {
       // Verificar se é um número válido
       if (isNaN(numValue) || !isFinite(numValue)) {
         this.hasError = true;
-        this.errorMessage = 'Digite um número válido';
+        this.error = 'Digite um número válido';
         return;
       }
       
       // Verificar se é positivo
       if (numValue <= 0) {
         this.hasError = true;
-        this.errorMessage = 'O valor deve ser maior que zero';
+        this.error = 'O valor deve ser maior que zero';
         return;
       }
       
       // Verificar limite máximo
       if (numValue > 999999999.99) {
         this.hasError = true;
-        this.errorMessage = 'Valor muito alto (máximo: 999.999.999,99)';
+        this.error = 'Valor muito alto (máximo: 999.999.999,99)';
         return;
       }
     }
     
     this.hasError = false;
-    this.errorMessage = '';
+    this.error = '';
   }
 
   private validateInput(value: string): void {
     if (this.required && !value.trim()) {
       this.hasError = true;
-      this.errorMessage = `${this.label} é obrigatório`;
+      this.error = `${this.label} é obrigatório`;
     } else {
       this.hasError = false;
-      this.errorMessage = '';
+      this.error = '';
     }
   }
 }
