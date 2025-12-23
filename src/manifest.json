@@ -1,0 +1,25 @@
+{
+  "name": "Bytebank",
+  "short_name": "Bytebank",
+  "description": "Aplicação bancária com Clean Architecture",
+  "theme_color": "#004D61",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/images/ByteBank-Icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/ByteBank-Icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideRouter } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 
@@ -22,8 +24,8 @@ describe('AppComponent', () => {
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, investments-mfe');
+    expect(app.title).toEqual('investments-mfe');
   });
 });

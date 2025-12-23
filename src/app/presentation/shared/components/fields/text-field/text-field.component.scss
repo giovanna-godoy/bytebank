@@ -1,0 +1,27 @@
+@use '../../../../../../assets/styles/variables' as *;
+@use '../../../../../../assets/styles/colors' as colors;
+@use '../../../../../../assets/styles/breakpoints' as *;
+@use '@angular/material' as mat;
+
+.text-field {
+    width: 100%;
+}
+
+::ng-deep .text-field .mat-form-field-flex {
+  background-color: #fff; // fundo branco
+}
+
+::ng-deep .text-field .mat-form-field-outline-thick {
+  stroke: #009688; // cor da borda ativa
+}
+
+::ng-deep .text-field .mat-form-field-outline-start,
+::ng-deep .text-field .mat-form-field-outline-end {
+  border-color: #009688; // cor da borda normal
+}
+
+
+.required-asterisk {
+  color: #f44336;
+  margin-left: 2px;
+}

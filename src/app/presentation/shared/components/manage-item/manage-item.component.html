@@ -1,0 +1,101 @@
+<section class="manage-item" role="region" [attr.aria-label]="(isEdit ? 'Editar' : 'Nova') + ' transação'">
+    <div class="manage-item__column">
+        <header class="manage-item__infos">
+            <h2 class="manage-item__title" id="form-title">
+                {{ isEdit ? 'Editar' : 'Nova'}} Transação
+            </h2>
+            <form class="manage-item__form" role="form" aria-labelledby="form-title" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Selecione o tipo de transação</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option [value]="option.type" *ngFor="let option of typeOptions">
+                            {{ option.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="transactionForm.get('type')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" formControlName="value" placeholder="0,00">
+                    <mat-error *ngIf="transactionForm.get('value')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                    <mat-error *ngIf="transactionForm.get('value')?.hasError('min')">
+                        Valor deve ser maior que zero
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Data</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="transactionForm.get('date')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="full-width">
+                    <mat-label>Categoria</mat-label>
+                    <input type="text" matInput formControlName="category" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                            {{ category }}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="transactionForm.get('category')?.invalid && transactionForm.get('category')?.touched">
+                        {{ getErrorMessage('category') }}
+                    </mat-error>
+                </mat-form-field>
+                
+
+                <div class="attachment-section">
+                    <label class="attachment-label">
+                        <mat-icon>attach_file</mat-icon>
+                        Anexar recibos/documentos
+                        <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" hidden>
+                    </label>
+                    <!-- Anexos existentes (modo edição) -->
+                    <div class="attachments-list" *ngIf="isEdit && existingAttachments.length > 0">
+                        <div class="existing-attachments-label">Anexos existentes:</div>
+                        <div class="attachment-item existing-attachment" *ngFor="let attachment of existingAttachments; let i = index">
+                            <span>{{ attachment.name }}</span>
+                            <div class="attachment-actions">
+                                <button type="button" mat-icon-button (click)="downloadAttachment(attachment)" *ngIf="attachment.base64">
+                                    <mat-icon>download</mat-icon>
+                                </button>
+                                <button type="button" mat-icon-button (click)="removeExistingAttachment(i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Novos anexos -->
+                    <div class="attachments-list" *ngIf="attachments.length > 0">
+                        <div class="new-attachments-label" *ngIf="isEdit">Novos anexos:</div>
+                        <div class="attachment-item" *ngFor="let file of attachments; let i = index">
+                            <span>{{ file.name }}</span>
+                            <button type="button" mat-icon-button (click)="removeAttachment(i)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button 
+                    mat-flat-button 
+                    type="submit"
+                    [disabled]="!enableButton()"
+                    [attr.aria-label]="(isEdit ? 'Salvar alterações da' : 'Criar nova') + ' transação'"
+                    class="manage-item__submit-btn">
+                    {{ isEdit ? 'Salvar Alterações' : 'Criar nova Transação' }}
+                </button>
+            </form>
+        </header>
+        <div class="manage-item__footer" aria-hidden="true"></div>
+    </div>
+</section>

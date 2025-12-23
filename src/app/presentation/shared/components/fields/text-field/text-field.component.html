@@ -1,0 +1,16 @@
+<mat-form-field appearance="fill" class="text-field">
+    <mat-label>{{ label }} <span *ngIf="required" class="required-asterisk">*</span></mat-label>
+    <input 
+        matInput 
+        [type]="type === 'number' ? 'text' : type" 
+        [value]="value" 
+        (input)="onInputChange($event)"
+        (blur)="onBlur($event)"
+        (keypress)="onKeyPress($event)"
+        [attr.aria-label]="label"
+        [attr.aria-required]="required"
+        [attr.aria-describedby]="errorId"
+        [id]="fieldId"
+        [placeholder]="type === 'number' ? '0,00' : ''">
+    <mat-error [id]="errorId" *ngIf="error">{{ error }}</mat-error>
+</mat-form-field>

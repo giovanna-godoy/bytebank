@@ -1,0 +1,23 @@
+<div class="dashboard-container">
+  <header>
+    <h1>Dashboard - Bytebank</h1>
+    <div class="user-info" *ngIf="user">
+      <span>Olá, {{ user.firstName }} {{ user.lastName }}</span>
+      <button (click)="logout()">Sair</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="cards">
+      <div class="card" (click)="navigateToAccounts()">
+        <h3>Contas</h3>
+        <p>Gerencie suas contas</p>
+      </div>
+
+      <div class="card" (click)="navigateToTransactions()">
+        <h3>Transações</h3>
+        <p>Visualize seu extrato</p>
+      </div>
+    </div>
+  </main>
+</div>

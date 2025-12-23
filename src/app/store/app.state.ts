@@ -1,7 +1,9 @@
-import { StatementItem } from '../shared/models/statement.model';
-import { User } from '../shared/models/user.model';
+import { StatementItem } from '../presentation/shared/models/statement.model';
+import { User } from '../presentation/shared/models/user.model';
+import { AuthState } from './auth/auth.reducer';
 
 export interface AppState {
+  auth: AuthState;
   user: UserState;
   transactions: TransactionState;
   ui: UIState;

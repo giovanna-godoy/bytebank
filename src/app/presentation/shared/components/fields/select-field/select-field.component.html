@@ -1,0 +1,17 @@
+<mat-form-field appearance="fill" class="select-field">
+    <mat-label>{{ label }} <span *ngIf="required" class="required-asterisk">*</span></mat-label>
+    <mat-select 
+        [(value)]="selected" 
+        (selectionChange)="onSelectionChange($event)"
+        [disabled]="disabled"
+        [attr.aria-label]="label"
+        [attr.aria-required]="required"
+        [id]="fieldId">
+        <mat-option 
+            [value]="option.type" 
+            *ngFor="let option of options; trackBy: trackByType"
+            [attr.aria-label]="'Selecionar ' + option.name">
+            {{ option.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

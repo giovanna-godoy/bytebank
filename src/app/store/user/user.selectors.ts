@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { UserState } from '../app.state';
+import { selectAllTransactions } from '../transactions/transactions.selectors';
 
 export const selectUserState = createFeatureSelector<UserState>('user');
 
@@ -10,7 +11,23 @@ export const selectCurrentUser = createSelector(
 
 export const selectUserAmount = createSelector(
   selectUserState,
-  (state: UserState) => state.amount
+  selectAllTransactions,
+  (state: UserState, transactions) => {
+    // Saldo inicial da API (antes de qualquer transação)
+    const INITIAL_BALANCE = 2500;
+    
+    // Calcula o saldo baseado nas transações
+    const balance = transactions.reduce((acc, transaction) => {
+      if (transaction.type === 'DEPOSITO') {
+        return acc + transaction.value;
+      } else if (transaction.type === 'TRANSFERENCIA') {
+        return acc - transaction.value;
+      }
+      return acc;
+    }, INITIAL_BALANCE);
+    
+    return balance;
+  }
 );
 
 export const selectUserLoading = createSelector(

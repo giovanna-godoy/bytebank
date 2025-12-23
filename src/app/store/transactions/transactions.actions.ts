@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { StatementItem } from '../../shared/models/statement.model';
+import { StatementItem } from '../../presentation/shared/models/statement.model';
 import { TransactionFilters } from '../app.state';
 
 export const loadTransactions = createAction('[Transactions] Load Transactions');

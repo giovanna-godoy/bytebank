@@ -23,8 +23,10 @@
     {
       "id": "4",
       "type": "TRANSFERENCIA",
-      "value": 500,
-      "date": "2025-05-21"
+      "value": 5000,
+      "date": "2025-05-21",
+      "category": "Outros",
+      "attachments": []
     },
     {
       "id": "e275",
@@ -37,7 +39,7 @@
     {
       "id": "f05a",
       "type": "DEPOSITO",
-      "value": 50,
+      "value": 5000,
       "date": "2025-07-25",
       "category": "Alimentação",
       "attachments": []
