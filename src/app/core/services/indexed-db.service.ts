@@ -21,10 +21,17 @@ export class IndexedDBService {
         
         if (!db.objectStoreNames.contains('transactions')) {
           db.createObjectStore('transactions', { keyPath: 'id', autoIncrement: true });
+          console.log('📦 IndexedDB: Store "transactions" criada');
         }
         
         if (!db.objectStoreNames.contains('pendingActions')) {
           db.createObjectStore('pendingActions', { keyPath: 'id', autoIncrement: true });
+          console.log('📦 IndexedDB: Store "pendingActions" criada');
+        }
+        
+        if (!db.objectStoreNames.contains('auth')) {
+          db.createObjectStore('auth', { keyPath: 'timestamp' });
+          console.log('📦 IndexedDB: Store "auth" criada');
         }
       };
     });
@@ -42,7 +49,10 @@ export class IndexedDBService {
       const store = transaction.objectStore(storeName);
       const request = store.put(value);
 
-      request.onsuccess = () => resolve();
+      request.onsuccess = () => {
+        console.log(`💾 IndexedDB: Dados salvos em "${storeName}"`, value);
+        resolve();
+      };
       request.onerror = () => reject(request.error);
     });
   }

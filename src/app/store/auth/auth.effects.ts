@@ -94,6 +94,7 @@ export class AuthEffects {
     try {
       await this.indexedDB.initialize();
       await this.indexedDB.set('auth', tokenData);
+      console.log('✅ Tokens salvos no IndexedDB:', tokenData);
     } catch (error) {
       console.warn('IndexedDB storage failed, using sessionStorage only');
     }

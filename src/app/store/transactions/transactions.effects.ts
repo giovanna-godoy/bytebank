@@ -1,14 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import * as TransactionActions from './transactions.actions';
+import { loadAmount } from '../user/user.actions';
 
 @Injectable()
 export class TransactionEffects {
   private actions$ = inject(Actions);
   private transactionRepository = inject(ITransactionRepository);
+  private store = inject(Store);
 
   loadTransactions$ = createEffect(() =>
     this.actions$.pipe(
@@ -56,6 +59,39 @@ export class TransactionEffects {
         )
       )
     )
+  );
+
+  createTransactionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TransactionActions.createTransactionSuccess),
+      tap(() => {
+        // Recarrega o saldo após criar transação
+        this.store.dispatch(loadAmount());
+      })
+    ),
+    { dispatch: false }
+  );
+
+  updateTransactionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TransactionActions.updateTransactionSuccess),
+      tap(() => {
+        // Recarrega o saldo após atualizar transação
+        this.store.dispatch(loadAmount());
+      })
+    ),
+    { dispatch: false }
+  );
+
+  deleteTransactionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TransactionActions.deleteTransactionSuccess),
+      tap(() => {
+        // Recarrega o saldo após deletar transação
+        this.store.dispatch(loadAmount());
+      })
+    ),
+    { dispatch: false }
   );
 
   loadMoreTransactions$ = createEffect(() =>
